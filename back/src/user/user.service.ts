@@ -1,26 +1,119 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { hash } from 'bcrypt';
 
 @Injectable()
 export class UserService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(private prisma: PrismaService) {}
+
+  async create(createUserDto: CreateUserDto) {
+    const hashedPassword = await hash(createUserDto.password, 10);
+    const user = await this.prisma.user.create({
+      data: {
+        email: createUserDto.email,
+        firstName: createUserDto.firstName,
+        lastName: createUserDto.lastName,
+        password: hashedPassword,
+        role: createUserDto.role,
+      },
+    });
+
+    return user;
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findAll() {
+    const users = await this.prisma.user.findMany();
+
+    return users;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+
+    return user;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+
+    const updatedUser = await this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        email: updateUserDto.email,
+        firstName: updateUserDto.firstName,
+        lastName: updateUserDto.lastName,
+        role: updateUserDto.role,
+      },
+    });
+
+    return updatedUser;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+
+    const deletedUser = await this.prisma.user.delete({
+      where: {
+        id,
+      },
+    });
+
+    return deletedUser;
+  }
+
+  async findByEmail(email: string) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+
+    return user;
+  }
+
+  async updatePassword(id: number, password: string) {
+    const hashedPassword = await hash(password, 10);
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+
+    const updatedUser = await this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        password: hashedPassword,
+      },
+    });
+
+    return updatedUser;
   }
 }
