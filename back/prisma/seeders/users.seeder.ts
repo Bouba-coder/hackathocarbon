@@ -8,7 +8,8 @@ export default async function usersSeeder() {
 
     enum Role {
         ADMIN = 'ADMIN',
-        USER = 'USER',
+        CONSULTANT = 'CONSULTANT',
+        RH = 'RH',
     }
 
     const data = [
@@ -24,15 +25,22 @@ export default async function usersSeeder() {
             firstName: 'michel',
             lastName: 'dupont',
             password: passwordUsers,
-            role: Role.USER,
+            role: Role.CONSULTANT,
         },
         {
             email: 'oreg@gmail.com',
             firstName: 'olivier',
             lastName: 'regnier',
             password: passwordUsers,
-            role: Role.USER,
-        }
+            role: Role.CONSULTANT,
+        },
+        {
+            email: 'ast@gmail.com',
+            firstName: 'astrid',
+            lastName: 'toussaint',
+            password: passwordUsers,
+            role: Role.RH
+        },
     ];
 
     await Promise.all(
