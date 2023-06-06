@@ -26,3 +26,30 @@ enum Role {
   ADMIN
   RH
 }
+
+model Formation {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  domain    String
+  level     Level
+  duration  Int
+  place     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Level {
+  JUNIOR
+  SENIOR
+  EXPERT
+  MASTER
+  DOCTOR
+}
+
+model Company {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  email     String   
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
