@@ -14,13 +14,17 @@ export class ConsultantService {
     const consultant = this.prisma.consultant.create(
       { data: createConsultantDto }
       );
-
-    console.log("create consultant", consultant)
     return consultant;
   }
 
   findAll() {
-    const consultants : any = this.prisma.consultant.findMany();
+    const consultants : any = this.prisma.consultant.findMany({
+      include: {
+        experiences: true,
+        formations: true,
+        clients: true,
+      }
+    });
     return consultants;
   }
 
