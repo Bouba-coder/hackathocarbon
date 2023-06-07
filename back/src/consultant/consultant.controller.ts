@@ -18,24 +18,27 @@ export class ConsultantController {
             perimetre: createConsultantDto.perimetre,
             competences: createConsultantDto.competences,
             experiences: {
-              create: [createConsultantDto.experiences]},
+              create: [{
+              nom_entreprise: createConsultantDto.experiences_nom_entreprise,
+              poste: createConsultantDto.experiences_poste
+            }]},
             formations: {
               create: [
                 {
-              nom: 'toto formation',
-              diplome: 'license',
-              niveau: 'expert'
+              nom: createConsultantDto.formations_nom,
+              diplome: createConsultantDto.formations_diplome,
+              niveau: createConsultantDto.formations_niveau
             }]
           },
             clients: {
               create: [{
-              contact: 'toto 2',
-              nom: 'entreprise client',
-              secteur: 'secteur client'
+              contact: createConsultantDto.clients_contact,
+              nom: createConsultantDto.clients_nom,
+              secteur: createConsultantDto.clients_secteur
             }]},
-            level: 2,
-            salaire: 3000,
-            userId: 3
+            level: createConsultantDto.level,
+            salaire: createConsultantDto.salaire,
+            userId: createConsultantDto.user_id
 });
 return consultant;
 
@@ -53,6 +56,7 @@ return consultant;
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateConsultantDto: UpdateConsultantDto) {
+    console.log("patchhh consultant", updateConsultantDto)
     return this.consultantService.update(+id, updateConsultantDto);
   }
 
