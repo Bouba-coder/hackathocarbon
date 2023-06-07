@@ -17,29 +17,24 @@ POST {{ baseURL }}/consultant
 Content-Type: application/json
 
 {
-  "email" : "Boubacar@email.fr",
-  "metier": "testeeur",
-  "secteur": "banque",
+  "email" : "Boubacariii@gmail.fr",
+  "metier": "testeeurrrr",
+  "secteur": "banquerr",
   "disponibilite": "SIX_MOIS",
   "perimetre": "3 km",
   "competences": ["java", "test"],
-  "experiences": {
-    "nom_entreprise" : "toto entreprise",
-    "poste" : "dev"
-  },
-  "formations": {
-    "nom" : "toto formation",
-    "diplome" : "license",
-    "niveau" : "expert"
-  },
-  "clients": {
-    "contact" : "toto contact de con",
-    "nom" : "entreprise client",
-    "secteur" : "secteur client"
-  },
+  "experiences_nom_entreprise" : "nom de l'entreprise clients",
+  "experiences_poste" : "toto entreprise",
+  "poste" : "dev",
+  "formations_nom" : "toto formation",
+  "formations_diplome" : "formations_diplome",
+  "formations_niveau" : "formations_niveau",
+  "clients_contact" : "mon contacte dd",
+  "clients_nom" : "entreprise client",
+  "clients_secteur" : "secteur client",
   "level": 2,
   "salaire": 3000,
-  "userId": 2
+  "user_id": 2
 }
 
 ###

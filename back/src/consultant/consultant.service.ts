@@ -19,13 +19,11 @@ export class ConsultantService {
   }
 
   findAll() {
-    //return `This action returns all consultant`;
     const consultants : any = this.prisma.consultant.findMany();
     return consultants;
   }
 
   findOne(id: number) {
-    //return `This action returns a #${id} consultant`;
     const consultant : any = this.prisma.consultant.findUnique({
       where: {
         id: id,
@@ -35,8 +33,7 @@ export class ConsultantService {
     return consultant;
   }
 
-  update(id: number, updateConsultantDto: any) {
-    //return `This action updates a #${id} consultant`;
+  update(id: number, updateConsultantDto: UpdateConsultantDto) {
     const consultant = this.prisma.consultant.update({
       where: {
         id: id,
@@ -48,7 +45,6 @@ export class ConsultantService {
   }
 
   remove(id: number) {
-    //return `This action removes a #${id} consultant`;
     const consultant = this.prisma.consultant.delete({
       where: {
         id: id,
