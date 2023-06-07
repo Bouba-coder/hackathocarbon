@@ -1,0 +1,93 @@
+# baseURL
+@baseURL = http://localhost:3000
+
+###
+# get all consultant
+GET {{ baseURL }}/consultant
+Content-Type: application/json
+
+###
+# get consultant
+GET {{ baseURL }}/consultant/:id="646b2a1b6ea925d2d3dc6b0e"
+Content-Type: application/json
+
+###
+# create analytics
+POST {{ baseURL }}/consultant
+Content-Type: application/json
+
+{
+  "email" : "Boubacar@email.fr",
+  "metier": "testeeur",
+  "secteur": "banque",
+  "disponibilite": "SIX_MOIS",
+  "perimetre": "3 km",
+  "competences": ["java", "test"],
+  "experiences": {
+    "nom_entreprise" : "toto entreprise",
+    "poste" : "dev"
+  },
+  "formations": {
+    "nom" : "toto formation",
+    "diplome" : "license",
+    "niveau" : "expert"
+  },
+  "clients": {
+    "contact" : "toto contact de con",
+    "nom" : "entreprise client",
+    "secteur" : "secteur client"
+  },
+  "level": 2,
+  "salaire": 3000,
+  "userId": 2
+}
+
+###
+# update analytics
+PUT {{ baseURL }}/Analytics/uiid
+Content-Type: application/json
+
+{   
+  "appName" : "Bouba13",
+  "apiKey": "1234",
+  "userAgent": "users apgent",
+  "baseUrl": "www.google.fr",
+  "data": "body"
+}
+
+###
+# delete analytics
+DELETE {{ baseURL }}/Analytics/1
+
+
+###
+# create visitors
+POST {{ baseURL }}/createVisitors
+Content-Type: application/json
+
+{
+  "apiKey": "totto",
+  "appName": "bouba1234",
+  "userAgent": "user agent",
+  "baseUrl": "url base"
+}
+
+
+###
+# count visitors
+POST  {{ baseURL }}/AnalyticsVisitors
+Content-Type: application/json
+
+{
+  "apiKey": "toto2",
+  "appName": "bouba2",
+  "userAgent": "user agent",
+  "baseUrl": "url base"
+}
+
+
+###
+# get all visitors count
+GET {{ baseURL }}/AnalyticsVisitors
+Content-Type: application/json
+
