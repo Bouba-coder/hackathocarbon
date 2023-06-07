@@ -4,6 +4,7 @@ import { IsArray, IsEmail, IsEnum, IsInt, IsOptional, IsString } from 'class-val
 import { Disponibilite, Role } from '@prisma/client';
 
 export class UpdateConsultantDto extends PartialType(CreateConsultantDto) {
+    
     @IsOptional()
     @IsString()
     readonly email: string;
@@ -33,40 +34,20 @@ export class UpdateConsultantDto extends PartialType(CreateConsultantDto) {
     readonly competences: string[];
 
     @IsOptional()
-    @IsString()
-    readonly experiences_nom_entreprise: string;
+    @IsArray()
+    readonly experiences: string[];
 
     @IsOptional()
-    @IsString()
-    readonly experiences_poste: string;
-
-    @IsOptional()
-    @IsString()
-    readonly formations_nom: string;
-
-    @IsOptional()
-    @IsString()
-    readonly formations_diplome: string;
-
-    @IsOptional()
-    @IsString()
-    readonly formations_niveau: string;
-
-    @IsOptional()
-    @IsString()
-    readonly clients_contact: string;
-
-    @IsOptional()
-    @IsString()
-    readonly clients_nom: string;
-
-    @IsOptional()
-    @IsString()
-    readonly clients_secteur: string;
+    @IsArray()
+    readonly formations: string[];
 
     @IsOptional()
     @IsInt()
     readonly level: number;
+
+    @IsOptional()
+    @IsInt()
+    readonly actuel_entrepriseId: number;
 
     @IsOptional()
     @IsInt()
