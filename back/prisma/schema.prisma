@@ -10,6 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// shemat User -- on change le role users pour que le rh soit rh
 model User {
   id         Int          @id @default(autoincrement())
   email      String       @unique
@@ -20,6 +21,7 @@ model User {
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
   Consultant Consultant[]
+  Article    Article[]
 }
 
 enum Disponibilite {
@@ -37,7 +39,7 @@ enum Role {
 // shemat Client
 model Client {
   id         Int          @id @default(autoincrement())
-  contact    String      
+  contact    String
   nom        String
   secteur    String
   // relation avec le model Consultant
@@ -83,4 +85,14 @@ model Consultant {
   // relation avec le model User
   user          User          @relation(fields: [userId], references: [id])
   userId        Int
+}
+
+// shemat article
+model Article {
+  id       Int    @id @default(autoincrement())
+  title    String
+  content  String
+  category String
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId Int // relation scalar field  (used in the `@relation` attribute above)
 }
