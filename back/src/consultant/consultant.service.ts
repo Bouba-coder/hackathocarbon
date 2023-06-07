@@ -10,6 +10,7 @@ export class ConsultantService {
 
   create(createConsultantDto: any) {
     //return 'This action adds a new consultant';
+    console.log("testttter", createConsultantDto)
     const consultant = this.prisma.consultant.create(
       { data: createConsultantDto }
       );

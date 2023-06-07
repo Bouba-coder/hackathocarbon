@@ -8,7 +8,7 @@ Content-Type: application/json
 
 ###
 # get consultant
-GET {{ baseURL }}/consultant/:id="646b2a1b6ea925d2d3dc6b0e"
+GET {{ baseURL }}/consultant/1
 Content-Type: application/json
 
 ###
@@ -38,51 +38,30 @@ Content-Type: application/json
 }
 
 ###
-# update analytics
-PUT {{ baseURL }}/Analytics/uiid
+# update con
+PATCH  {{ baseURL }}/consultant/2
 Content-Type: application/json
 
-{   
-  "appName" : "Bouba13",
-  "apiKey": "1234",
-  "userAgent": "users apgent",
-  "baseUrl": "www.google.fr",
-  "data": "body"
-}
+  {
+    "id": 2,
+    "email": "Boub13@email.fr",
+    "role": "CONSULTANT",
+    "createdAt": "2023-06-07T08:32:16.469Z",
+    "updatedAt": "2023-06-07T08:32:16.469Z",
+    "metier": "testeeur",
+    "secteur": "banque",
+    "disponibilite": "SIX_MOIS",
+    "perimetre": "3 km",
+    "competences": [
+      "java",
+      "test"
+    ],
+    "level": 2,
+    "salaire": 3000,
+    "userId": 1
+  }
 
 ###
-# delete analytics
-DELETE {{ baseURL }}/Analytics/1
-
-
-###
-# create visitors
-POST {{ baseURL }}/createVisitors
-Content-Type: application/json
-
-{
-  "apiKey": "totto",
-  "appName": "bouba1234",
-  "userAgent": "user agent",
-  "baseUrl": "url base"
-}
-
-
-###
-# count visitors
-POST  {{ baseURL }}/AnalyticsVisitors
-Content-Type: application/json
-
-{
-  "apiKey": "toto2",
-  "appName": "bouba2",
-  "userAgent": "user agent",
-  "baseUrl": "url base"
-}
-
-
-###
-# get all visitors count
-GET {{ baseURL }}/AnalyticsVisitors
-Content-Type: application/json
+# delete consultant
+DELETE {{ baseURL }}/consultant/1
 
