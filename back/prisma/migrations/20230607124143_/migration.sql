@@ -1,17 +1,28 @@
 -- CreateEnum
 CREATE TYPE "Disponibilite" AS ENUM ('IMMEDIAT', 'TROIS_MOIS', 'SIX_MOIS');
 
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('CONSULTANT', 'ADMIN', 'RH');
+
+-- CreateTable
+CREATE TABLE "User" (
+    "id" SERIAL NOT NULL,
+    "email" TEXT NOT NULL,
+    "firstName" TEXT NOT NULL,
+    "lastName" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "role" "Role" NOT NULL DEFAULT 'CONSULTANT',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateTable
 CREATE TABLE "Client" (
     "id" SERIAL NOT NULL,
-    "email" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "contact" TEXT NOT NULL,
     "nom" TEXT NOT NULL,
-    "adresse" TEXT NOT NULL,
-    "code_postal" TEXT NOT NULL,
-    "ville" TEXT NOT NULL,
-    "pays" TEXT NOT NULL,
     "secteur" TEXT NOT NULL,
 
     CONSTRAINT "Client_pkey" PRIMARY KEY ("id")
@@ -20,12 +31,8 @@ CREATE TABLE "Client" (
 -- CreateTable
 CREATE TABLE "Experience" (
     "id" SERIAL NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
     "nom_entreprise" TEXT NOT NULL,
     "poste" TEXT NOT NULL,
-    "date_debut" TIMESTAMP(3) NOT NULL,
-    "date_fin" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Experience_pkey" PRIMARY KEY ("id")
 );
@@ -33,13 +40,9 @@ CREATE TABLE "Experience" (
 -- CreateTable
 CREATE TABLE "Formation" (
     "id" SERIAL NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
     "nom" TEXT NOT NULL,
     "diplome" TEXT NOT NULL,
     "niveau" TEXT NOT NULL,
-    "date_debut" TIMESTAMP(3) NOT NULL,
-    "date_fin" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Formation_pkey" PRIMARY KEY ("id")
 );
@@ -58,7 +61,6 @@ CREATE TABLE "Consultant" (
     "competences" TEXT[],
     "level" INTEGER NOT NULL,
     "salaire" INTEGER NOT NULL,
-    "date_arrive" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
 
     CONSTRAINT "Consultant_pkey" PRIMARY KEY ("id")
@@ -83,7 +85,7 @@ CREATE TABLE "_ConsultantToFormation" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Client_email_key" ON "Client"("email");
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Consultant_email_key" ON "Consultant"("email");
