@@ -18,13 +18,7 @@ export class ConsultantService {
   }
 
   findAll() {
-    const consultants : any = this.prisma.consultant.findMany({
-      include: {
-        experiences: true,
-        formations: true,
-        clients: true,
-      }
-    });
+    const consultants : any = this.prisma.consultant.findMany();
     return consultants;
   }
 

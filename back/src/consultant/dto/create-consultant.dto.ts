@@ -1,11 +1,6 @@
 import { IsString, IsEnum, IsArray, IsInt, IsDate, IsOptional } from "class-validator";
-import { Role, Disponibilite, Experience, Formation, User, Client } from "@prisma/client";
+import { Role, Disponibilite, Formation, User, Client } from "@prisma/client";
 
-
-export interface experiences {
-    nom_entreprise: string;
-    poste: string;
-}
 export class CreateConsultantDto {
     @IsString()
     readonly email: string;
@@ -28,29 +23,14 @@ export class CreateConsultantDto {
     @IsArray()
     readonly competences: string[];
 
-    @IsString()
-    readonly experiences_nom_entreprise: string;
+    @IsArray()
+    readonly experiences: string[];
 
-    @IsString()
-    readonly experiences_poste: string;
+    @IsArray()
+    readonly formations: string[];
 
-    @IsString()
-    readonly formations_nom: string;
-
-    @IsString()
-    readonly formations_diplome: string;
-
-    @IsString()
-    readonly formations_niveau: string;
-
-    @IsString()
-    readonly clients_contact: string;
-
-    @IsString()
-    readonly clients_nom: string;
-
-    @IsString()
-    readonly clients_secteur: string;
+    @IsInt()
+    readonly actuel_entrepriseId: number;
 
     @IsInt()
     readonly level: number;
