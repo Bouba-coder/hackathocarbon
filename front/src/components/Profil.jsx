@@ -17,7 +17,7 @@ export default function ProfilConsultant(props) {
             Nom - Email - Metier
         </Typography>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-        { consult?.user?.firstName } { consult?.user?.lastName } - { consult?.user?.email } - { consult.metier }
+        {/* { consult?.user?.firstName } { consult?.user?.lastName } - { consult?.user?.email } - { consult.metier } */}
         </Typography>
         <Typography variant="h5" component="div">
           Secteur 
@@ -31,13 +31,13 @@ export default function ProfilConsultant(props) {
         <Typography variant="body2">
           {
             consult?.parcours?.map(res => {
-                return (
-                    <div>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        { res }
-                    </Typography>
-                    </div>
-                )
+              return (
+                <div>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      { res }
+                  </Typography>
+                </div>
+              )
             })
           }
         </Typography>
