@@ -10,6 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// shemat User -- on change le role users pour que le rh soit rh
 model User {
   id         Int          @id @default(autoincrement())
   email      String       @unique
@@ -21,6 +22,18 @@ model User {
   formation  Formation[]
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
+<<<<<<< HEAD
+=======
+  Consultant Consultant[]
+  Article    Article[]
+  Formation  Formation[]
+}
+
+enum Disponibilite {
+  IMMEDIAT
+  TROIS_MOIS
+  SIX_MOIS
+>>>>>>> dev
 }
 
 enum Role {
@@ -31,13 +44,21 @@ enum Role {
 
 model Entreprise {
   id         Int          @id @default(autoincrement())
+<<<<<<< HEAD
   nom        String       @unique
   contact    String?      
+=======
+  contact    String
+  nom        String
+  secteur    String
+  // relation avec le model Consultant
+>>>>>>> dev
   consultant Consultant[]
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
 }
 
+<<<<<<< HEAD
 model Formation {
   id          Int          @id @default(autoincrement())
   nom         String       @unique
@@ -47,9 +68,32 @@ model Formation {
   users       User[]
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
+=======
+// shemat Experience
+// model Experience {
+//   id             Int          @id @default(autoincrement())
+//   nom_entreprise String
+//   poste          String
+//   // relation avec le model Consultant
+//   consultant     Consultant[]
+// }
+
+// shemat Formation
+model Formation {
+  id      Int    @id @default(autoincrement())
+  nom     String
+  diplome String
+  niveau  String
+  // relation avec le model Consultant
+  //consultant Consultant[]
+  //relation with user with role rh
+  user    User   @relation(fields: [userId], references: [id])
+  userId  Int
+>>>>>>> dev
 }
 
 model Consultant {
+<<<<<<< HEAD
   id            Int           @id @default(autoincrement())
   metier        String?
   secteur       String?
@@ -67,3 +111,36 @@ model Consultant {
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 }
+=======
+  id                  Int           @id @default(autoincrement())
+  email               String        @unique
+  role                Role          @default(CONSULTANT)
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+  metier              String
+  secteur             String
+  disponibilite       Disponibilite
+  perimetre           String
+  competences         String[]
+  experiences         String[]
+  formations          String[]
+  //clients relation
+  actuel_entreprise   Client        @relation(fields: [actuel_entrepriseId], references: [id])
+  actuel_entrepriseId Int
+  level               Int
+  salaire             Int
+  // relation avec le model User
+  user                User          @relation(fields: [userId], references: [id])
+  userId              Int
+}
+
+// shemat article
+model Article {
+  id       Int    @id @default(autoincrement())
+  title    String
+  content  String
+  category String
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId Int // relation scalar field  (used in the `@relation` attribute above)
+}
+>>>>>>> dev

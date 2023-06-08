@@ -8,7 +8,7 @@ Content-Type: application/json
 
 ###
 # get consultant
-GET {{ baseURL }}/consultant/:id="646b2a1b6ea925d2d3dc6b0e"
+GET {{ baseURL }}/consultant/1
 Content-Type: application/json
 
 ###
@@ -17,72 +17,42 @@ POST {{ baseURL }}/consultant
 Content-Type: application/json
 
 {
-  "email" : "Boubacariii@gmail.fr",
+  "email" : "lassana11@gmail.fr",
   "metier": "testeeurrrr",
   "secteur": "banquerr",
   "disponibilite": "SIX_MOIS",
   "perimetre": "3 km",
   "competences": ["java", "test"],
-  "experiences_nom_entreprise" : "nom de l'entreprise clients",
-  "experiences_poste" : "toto entreprise",
-  "poste" : "dev",
-  "formations_nom" : "toto formation",
-  "formations_diplome" : "formations_diplome",
-  "formations_niveau" : "formations_niveau",
-  "clients_contact" : "mon contacte dd",
-  "clients_nom" : "entreprise client",
-  "clients_secteur" : "secteur client",
+  "experiences" : ["experiences 1", "expériences 2"],
+  "formations" :  ["Formaton java", "Formation Python"],
+  "actuel_entrepriseId" : 1,
   "level": 2,
   "salaire": 3000,
-  "user_id": 2
+  "user_id": 1
 }
 
 ###
-# update analytics
-PUT {{ baseURL }}/Analytics/uiid
+# update con
+PATCH  {{ baseURL }}/consultant/2
 Content-Type: application/json
 
-{   
-  "appName" : "Bouba13",
-  "apiKey": "1234",
-  "userAgent": "users apgent",
-  "baseUrl": "www.google.fr",
-  "data": "body"
-}
+  {
+    "id": 1,
+    "email" : "lassana11@gmail.fr",
+    "metier": "testeeurrrr",
+    "secteur": "banquerr",
+    "disponibilite": "SIX_MOIS",
+    "perimetre": "3 km",
+    "competences": ["java", "test"],
+    "experiences" : ["experiences 1", "expériences 2"],
+    "formations" :  ["Formaton windows", "Formation Python"],
+    "actuel_entrepriseId" : 1,
+    "level": 2,
+    "salaire": 3000,
+    "user_id": 2
+  }
 
 ###
-# delete analytics
-DELETE {{ baseURL }}/Analytics/1
-
-
-###
-# create visitors
-POST {{ baseURL }}/createVisitors
-Content-Type: application/json
-
-{
-  "apiKey": "totto",
-  "appName": "bouba1234",
-  "userAgent": "user agent",
-  "baseUrl": "url base"
-}
-
-
-###
-# count visitors
-POST  {{ baseURL }}/AnalyticsVisitors
-Content-Type: application/json
-
-{
-  "apiKey": "toto2",
-  "appName": "bouba2",
-  "userAgent": "user agent",
-  "baseUrl": "url base"
-}
-
-
-###
-# get all visitors count
-GET {{ baseURL }}/AnalyticsVisitors
-Content-Type: application/json
+# delete consultant
+DELETE {{ baseURL }}/consultant/1
 

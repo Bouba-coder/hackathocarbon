@@ -1,0 +1,40 @@
+# baseURL
+@baseURL = http://localhost:3000
+
+###
+# get all article
+GET {{ baseURL }}/article
+Content-Type: application/json
+
+###
+# get article
+GET {{ baseURL }}/article/1
+Content-Type: application/json
+
+###
+# create article
+POST {{ baseURL }}/article
+Content-Type: application/json
+
+{
+  "title" : "Boubacariii@gmail.fr",
+  "content": "testeeurrrr",
+  "category": "forum tag",
+  "authorId": 1
+}
+
+###
+# update article
+PATCH  {{ baseURL }}/article/2
+Content-Type: application/json
+
+{
+  "title": "je suis @gmail.fr",
+  "content": "testeeurrrr",
+  "category": "forum tag"
+}
+
+###
+# delete article
+DELETE {{ baseURL }}/article/1
+
