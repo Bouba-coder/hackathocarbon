@@ -31,4 +31,14 @@ export class UserController {
   remove(@Param('id') id: string) {
     return this.userService.remove(+id);
   }
+
+  @Patch(':id/subscribe/formations/:formationsId')
+  subscribeToFormation(@Param('id') id: string, @Param('formationsId') formationsId: string) {
+    return this.userService.subcribeToFormation(+id, +formationsId);
+  }
+
+  @Patch(':id/unsubscribe/formations/:formationsId')
+  unsubscribeToFormation(@Param('id') id: string, @Param('formationsId') formationsId: string) {
+    return this.userService.unsubscribeToFormation(+id, +formationsId);
+  }
 }

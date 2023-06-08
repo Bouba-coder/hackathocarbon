@@ -1,12 +1,16 @@
 import { PrismaClient } from '@prisma/client';
 import usersSeeder from './users.seeder';
-import consultantSeeder from './consultant.seeder';
+import entreprisesSeeder from './entreprises.seeder';
+import formationsSeeder from './formations.seeder';
+import consultantsSeeder from './consultants.seeder';
 
 const prisma = new PrismaClient();
 
 async function main() {
     await usersSeeder();
-    await consultantSeeder();
+    await entreprisesSeeder();
+    await formationsSeeder();
+    await consultantsSeeder();
 }
 
 main()

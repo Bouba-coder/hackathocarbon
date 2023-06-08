@@ -116,4 +116,70 @@ export class UserService {
 
     return updatedUser;
   }
+
+  async subcribeToFormation(userId: number, formationId: number) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+
+    const formation = await this.prisma.formation.findUnique({
+      where: {
+        id: formationId,
+      },
+    });
+
+    if (!formation) throw new HttpException('Formation not found', HttpStatus.NOT_FOUND);
+
+    const updatedUser = await this.prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        formation: {
+          connect: {
+            id: formationId,
+          },
+        },
+      },
+    });
+
+    return updatedUser;
+  }
+
+  async unsubscribeToFormation(userId: number, formationId: number) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+
+    const formation = await this.prisma.formation.findUnique({
+      where: {
+        id: formationId,
+      },
+    });
+
+    if (!formation) throw new HttpException('Formation not found', HttpStatus.NOT_FOUND);
+
+    const updatedUser = await this.prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        formation: {
+          disconnect: {
+            id: formationId,
+          },
+        },
+      },
+    });
+
+    return updatedUser;
+  }
 }

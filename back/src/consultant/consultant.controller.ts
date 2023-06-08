@@ -9,24 +9,8 @@ export class ConsultantController {
 
   @Post()
   create(@Body() createConsultantDto: CreateConsultantDto) {
-    console.log("data", createConsultantDto);
-      const consultant = this.consultantService.create({
-        email: createConsultantDto.email,
-        metier: createConsultantDto.metier,
-        secteur: createConsultantDto.secteur,
-        disponibilite: createConsultantDto.disponibilite,
-        perimetre: createConsultantDto.perimetre,
-        competences: createConsultantDto.competences,
-        experiences: createConsultantDto.experiences,
-        formations: createConsultantDto.formations,
-        actuel_entrepriseId: createConsultantDto.actuel_entrepriseId,
-        level: createConsultantDto.level,
-        salaire: createConsultantDto.salaire,
-        userId: createConsultantDto.user_id
-    });
-
-    return consultant;
-}
+    return this.consultantService.create(createConsultantDto);
+  }
 
   @Get()
   findAll() {
@@ -40,7 +24,6 @@ export class ConsultantController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateConsultantDto: UpdateConsultantDto) {
-    console.log("patchhh consultant", updateConsultantDto)
     return this.consultantService.update(+id, updateConsultantDto);
   }
 
