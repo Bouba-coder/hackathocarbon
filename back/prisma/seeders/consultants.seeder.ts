@@ -3,24 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export default async function consultantsSeeder() {
-    // model Consultant {
-    //     id            Int           @id @default(autoincrement())
-    //     metier        String?
-    //     secteur       String?
-    //     disponibilite String?
-    //     perimetre     String?
-    //     competences   String[]
-    //     level         Int?
-    //     salaire       Int?
-    //     experiences   String[]
-    //     parcours      String[]
-    //     entreprise   Entreprise?    @relation(fields: [entrepriseId], references: [id])
-    //     entrepriseId  Int?
-    //     user          User          @relation(fields: [userId], references: [id])
-    //     userId        Int           @unique
-    //     createdAt     DateTime      @default(now())
-    //     updatedAt     DateTime      @updatedAt
-    // }
+
     const data = [
         { 
             metier: 'Développeur',
