@@ -1,9 +1,7 @@
 import * as React from "react";
-import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
-import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
@@ -12,86 +10,100 @@ import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems, secondaryListItems } from "../components/ListItems";
-import Deposits from "../components/Deposits";
-import Orders from "../components/Orders";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import ListSubheader from "@mui/material/ListSubheader";
+import ListConsultants from "../components/ListConsultants";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import CorporateIcon from "@mui/icons-material/CorporateFare";
+import PeopleIcon from "@mui/icons-material/People";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import ProfileIcon from "@mui/icons-material/AccountCircle";
+import ListCompanies from "../components/ListCompanies";
+import ListTrainings from "../components/ListTrainings";
+import HomeRH from "../components/HomeRH";
+import Profile from "../components/Profile";
+import Copyright from "../components/Copyright";
+import AppBar from "../components/AppBar";
+import Drawer from "../components/Drawer";
 
-function Copyright(props) {
+const mainListItemsRH = (handleDisplay) => {
+  const itemsRH = [
+    {
+      onClick: () => handleDisplay(<HomeRH />),
+      icon: <DashboardIcon />,
+      text: 'Dashboard'
+    },
+    {
+      onClick: () => handleDisplay(<ListCompanies />),
+      icon: <CorporateIcon />,
+      text: 'Companies'
+    },
+    {
+      onClick: () => handleDisplay(<ListConsultants />),
+      icon: <PeopleIcon />,
+      text: 'Consultants'
+    },
+    {
+      onClick: () => handleDisplay(<ListTrainings />),
+      icon: <AssignmentIcon />,
+      text: 'Trainings'
+    }
+  ];
+
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
+    <>
+      {itemsRH.map((item, index) => (
+        <ListItemButton key={index} onClick={item.onClick}>
+          <ListItemIcon>{item.icon}</ListItemIcon>
+          <ListItemText primary={item.text} />
+        </ListItemButton>
+      ))}
+    </>
   );
-}
+};
 
-const drawerWidth = 240;
+const secondaryListItemsRH = (handleDisplay) => {
+  const secondaryItemsRH = [
+    {
+      onClick: () => handleDisplay(<Profile />),
+      icon: <ProfileIcon />,
+      text: 'Profile'
+    }
+  ];
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(["width", "margin"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  "& .MuiDrawer-paper": {
-    position: "relative",
-    whiteSpace: "nowrap",
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    boxSizing: "border-box",
-    ...(!open && {
-      overflowX: "hidden",
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      width: theme.spacing(7),
-      [theme.breakpoints.up("sm")]: {
-        width: theme.spacing(9),
-      },
-    }),
-  },
-}));
+  return (
+    <>
+      <ListSubheader component="div" inset>
+        My Information
+      </ListSubheader>
+      {secondaryItemsRH.map((item, index) => (
+        <ListItemButton key={index} onClick={item.onClick}>
+          <ListItemIcon>{item.icon}</ListItemIcon>
+          <ListItemText primary={item.text} />
+        </ListItemButton>
+      ))}
+    </>
+  );
+};
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function DashboardRH() {
+const DashboardRH = () => {
   const [open, setOpen] = React.useState(true);
+  const [display, setDisplay] = React.useState(<HomeRH />);
+
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const handleDisplay = (display) => {
+    setDisplay(display);
   };
 
   return (
@@ -147,9 +159,9 @@ export default function DashboardRH() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            {mainListItemsRH(handleDisplay)}
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+            {secondaryListItemsRH(handleDisplay)}
           </List>
         </Drawer>
         <Box
@@ -166,42 +178,16 @@ export default function DashboardRH() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 240,
-                  }}
-                ></Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 240,
-                  }}
-                >
-                  <Deposits />
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <Orders />
-                </Paper>
-              </Grid>
+            <Grid item xs={12} md={8} lg={9}>
+              {display}
             </Grid>
+
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
       </Box>
     </ThemeProvider>
   );
-}
+};
+
+export default DashboardRH;
