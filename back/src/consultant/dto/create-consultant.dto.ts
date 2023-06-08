@@ -1,64 +1,46 @@
-import { IsString, IsEnum, IsArray, IsInt, IsDate, IsOptional } from "class-validator";
-import { Role, Disponibilite, Experience, Formation, User, Client } from "@prisma/client";
+import { IsString, IsArray, IsInt, IsOptional, IsNumber } from "class-validator";
 
-
-export interface experiences {
-    nom_entreprise: string;
-    poste: string;
-}
 export class CreateConsultantDto {
+    @IsOptional()
     @IsString()
-    readonly email: string;
-    
-    @IsEnum(Role)
-    readonly role: Role;
-    
+    metier?: string;
+
+    @IsOptional()
     @IsString()
-    readonly metier: string;
+    secteur?: string;
 
+    @IsOptional()
     @IsString()
-    readonly secteur: string;
+    disponibilite?: string;
 
-    @IsEnum(Disponibilite)
-    readonly disponibilite: Disponibilite;
-
+    @IsOptional()
     @IsString()
-    readonly perimetre: string;
+    perimetre?: string;
 
+    @IsOptional()
     @IsArray()
-    readonly competences: string[];
+    competences?: string[];
 
-    @IsString()
-    readonly experiences_nom_entreprise: string;
+    @IsOptional()
+    @IsNumber()
+    level?: number;
 
-    @IsString()
-    readonly experiences_poste: string;
-
-    @IsString()
-    readonly formations_nom: string;
-
-    @IsString()
-    readonly formations_diplome: string;
-
-    @IsString()
-    readonly formations_niveau: string;
-
-    @IsString()
-    readonly clients_contact: string;
-
-    @IsString()
-    readonly clients_nom: string;
-
-    @IsString()
-    readonly clients_secteur: string;
-
+    @IsOptional()
     @IsInt()
-    readonly level: number;
+    salaire?: number;
 
-    @IsInt()
-    readonly salaire: number;
+    @IsOptional()
+    @IsArray()
+    experiences?: string[];
 
-    @IsInt()
-    readonly user_id: number;
- 
+    @IsOptional()
+    @IsArray()
+    parcours?: string[];
+
+    @IsOptional()
+    @IsNumber()
+    entrepriseId?: number;
+
+    @IsNumber()
+    userId: number;
 }

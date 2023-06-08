@@ -8,7 +8,7 @@ export class EntreprisesService {
   constructor(private prisma: PrismaService) {}
 
   async create(createEntrepriseDto: CreateEntrepriseDto) {
-    const entreprise = await this.prisma.client.create({
+    const entreprise = await this.prisma.entreprise.create({
       data: {
         ...createEntrepriseDto,
       },
@@ -18,13 +18,13 @@ export class EntreprisesService {
   }
 
   async findAll() {
-    const entreprises = await this.prisma.client.findMany();
+    const entreprises = await this.prisma.entreprise.findMany();
 
     return entreprises;
   }
 
   async findOne(id: number) {
-    const entreprise = await this.prisma.client.findUnique({
+    const entreprise = await this.prisma.entreprise.findUnique({
       where: {
         id,
       },
@@ -36,7 +36,7 @@ export class EntreprisesService {
   }
 
   async update(id: number, updateEntrepriseDto: UpdateEntrepriseDto) {
-    const entreprise = await this.prisma.client.findUnique({
+    const entreprise = await this.prisma.entreprise.findUnique({
       where: {
         id,
       },
@@ -44,7 +44,7 @@ export class EntreprisesService {
 
     if (!entreprise) throw new HttpException('Entreprise not found', HttpStatus.NOT_FOUND);
 
-    const updatedEntreprise = await this.prisma.client.update({
+    const updatedEntreprise = await this.prisma.entreprise.update({
       where: {
         id,
       },
@@ -57,7 +57,7 @@ export class EntreprisesService {
   }
 
   async remove(id: number) {
-    const entreprise = await this.prisma.client.findUnique({
+    const entreprise = await this.prisma.entreprise.findUnique({
       where: {
         id,
       },
@@ -65,7 +65,7 @@ export class EntreprisesService {
 
     if (!entreprise) throw new HttpException('Entreprise not found', HttpStatus.NOT_FOUND);
 
-    await this.prisma.client.delete({
+    await this.prisma.entreprise.delete({
       where: {
         id,
       },

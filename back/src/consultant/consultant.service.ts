@@ -1,56 +1,85 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { CreateConsultantDto } from './dto/create-consultant.dto';
 import { UpdateConsultantDto } from './dto/update-consultant.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class ConsultantService {
-
   constructor(private prisma: PrismaService) {}
 
-  create(createConsultantDto: any) {
-    //return 'This action adds a new consultant';
-    const consultant = this.prisma.consultant.create(
-      { data: createConsultantDto }
-      );
+  async create(createConsultantDto: CreateConsultantDto) {
+    const consultant = await this.prisma.consultant.create({
+      data: {
+        ...createConsultantDto,
+      },
+    });
 
-    console.log("create consultant", consultant)
     return consultant;
   }
 
-  findAll() {
-    const consultants : any = this.prisma.consultant.findMany();
+  async findAll() {
+    const consultants = await this.prisma.consultant.findMany({
+      include: {
+        entreprise: true,
+        user: true,
+      },
+    });
+
     return consultants;
   }
 
-  findOne(id: number) {
-    const consultant : any = this.prisma.consultant.findUnique({
+  async findOne(id: number) {
+    const consultant = await this.prisma.consultant.findUnique({
       where: {
         id: id,
       },
+      include: {
+        entreprise: true,
+        user: true,
+      },
     });
+
+    if (!consultant) throw new HttpException('Consultant not found', HttpStatus.NOT_FOUND);
 
     return consultant;
   }
 
-  update(id: number, updateConsultantDto: UpdateConsultantDto) {
-    const consultant = this.prisma.consultant.update({
+  async update(id: number, updateConsultantDto: UpdateConsultantDto) {
+    const consultant = await this.prisma.consultant.findUnique({
       where: {
         id: id,
       },
-      data: updateConsultantDto,
     });
 
-    return consultant;
+    if (!consultant) throw new HttpException('Consultant not found', HttpStatus.NOT_FOUND);
+
+    const updatedConsultant = await this.prisma.consultant.update({
+      where: {
+        id: id,
+      },
+      data: {
+        ...updateConsultantDto,
+      },
+    });
+
+    return updatedConsultant;
   }
 
-  remove(id: number) {
-    const consultant = this.prisma.consultant.delete({
+  async remove(id: number) {
+    const consultant = await this.prisma.consultant.findUnique({
       where: {
         id: id,
       },
     });
 
-    return consultant;
+    if (!consultant) throw new HttpException('Consultant not found', HttpStatus.NOT_FOUND);
+
+    const deletedConsultant = await this.prisma.consultant.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    return deletedConsultant;
   }
 }
