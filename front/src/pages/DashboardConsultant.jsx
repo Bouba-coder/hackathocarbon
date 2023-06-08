@@ -18,8 +18,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import {secondaryListItemsConsultant, mainListItemsConsultant} from "../components/ListItems";
-import Deposits from "../components/Deposits";
-import Orders from "../components/Orders";
+import Competences from "../components/Competences";
+import { useState, useEffect } from "react";
+import { getConsultants, getConsultantById } from "../utils/api";
+import ProfilConsultant from '../components/Profil'
+import Experiences from "../components/Experirences";
 
 function Copyright(props) {
   return (
@@ -89,6 +92,23 @@ const Drawer = styled(MuiDrawer, {
 const defaultTheme = createTheme();
 
 export default function DashboardConsultant() {
+
+  //get data from api
+const [data, setData] = useState([])
+const [consultant, setConsultant] = useState({})
+const [loading, setLoading] = useState(true)
+useEffect(() => {
+  getConsultants().then((res)=>{
+    console.log("get consultant", res)
+    setData(res)
+  })
+
+  getConsultantById(1).then((res)=>{
+    console.log("get consultant +++++ by id", res)
+    setConsultant(res)
+  })
+}, []);
+
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -169,14 +189,7 @@ export default function DashboardConsultant() {
             <Grid container spacing={3}>
               {/* Chart */}
               <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 240,
-                  }}
-                ></Paper>
+                  <ProfilConsultant  consultant = { consultant } />
               </Grid>
               {/* Recent Deposits */}
               <Grid item xs={12} md={4} lg={3}>
@@ -188,13 +201,13 @@ export default function DashboardConsultant() {
                     height: 240,
                   }}
                 >
-                  <Deposits />
+                  <Competences data={ consultant?.competences } />
                 </Paper>
               </Grid>
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <Orders />
+                  <Experiences />
                 </Paper>
               </Grid>
             </Grid>

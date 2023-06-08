@@ -18,8 +18,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems, secondaryListItems } from "../components/ListItems";
-import Deposits from "../components/Deposits";
 import Orders from "../components/Orders";
+import Competences from "../components/Competences";
 
 function Copyright(props) {
   return (
@@ -188,7 +188,7 @@ export default function DashboardRH() {
                     height: 240,
                   }}
                 >
-                  <Deposits />
+                  <Competences />
                 </Paper>
               </Grid>
               {/* Recent Orders */}
