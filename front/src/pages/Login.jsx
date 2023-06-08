@@ -10,26 +10,29 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import Snackbar from '@mui/material/Snackbar';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+// function Copyright(props) {
+//   return (
+//     <Typography
+//       variant="body2"
+//       color="text.secondary"
+//       align="center"
+//       {...props}
+//     >
+//       {"Copyright © "}
+//       <Link color="inherit" href="https://mui.com/">
+//         Your Website
+//       </Link>{" "}
+//       {new Date().getFullYear()}
+//       {"."}
+//     </Typography>
+//   );
+// }
 
 const defaultTheme = createTheme({
   palette: {
@@ -43,13 +46,61 @@ const defaultTheme = createTheme({
 });
 
 export default function SignIn() {
+  const navigate = useNavigate();
+  
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [state, setState] = useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+    message: '',
+  });
+  const { vertical, horizontal, open, message } = state;
+
+  // useEffect(() => {
+  //   const storedToken = localStorage.getItem('token');
+  //   if (storedToken) {
+  //     setToken(storedToken);
+  //   }
+  // }, []);
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/auth/login', {
+        email: username,
+        password: password,
+      });
+
+      localStorage.setItem('token', response.data.access_token);
+      console.log(response.data.access_token);
+
+      setState({ 
+        open: true,
+        vertical: 'top',
+        horizontal: 'right',
+        message: 'Connexion réussie',
+      });
+      navigate('/');
+
+    } catch (error) {
+      console.error(error);
+      setState({
+        open: true,
+        vertical: 'top',
+        horizontal: 'right',
+        message: 'Erreur de connexion',
+      });
+    }
+  };
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    handleLogin();
   };
 
   return (
@@ -68,7 +119,7 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Connexion
           </Typography>
           <Box
             component="form"
@@ -81,9 +132,11 @@ export default function SignIn() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Adresse email"
               name="email"
               autoComplete="email"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               autoFocus
             />
             <TextField
@@ -91,24 +144,26 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Mot de passe"
               type="password"
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Envoyer
             </Button>
-            <Grid container>
+            {/* <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
@@ -119,11 +174,19 @@ export default function SignIn() {
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
-            </Grid>
+            </Grid> */}
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        autoHideDuration={6000}
+        open={open}
+        onClose={handleClose}
+        message={message}
+        key={vertical + horizontal}
+      />
     </ThemeProvider>
   );
 }
