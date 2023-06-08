@@ -61,8 +61,8 @@ model Consultant {
   competences   String[]
   level         Int?
   salaire       Int?
-  experiences   String[]
-  parcours      String[]
+  experiences   Json[]
+  parcours      Json[]
   entreprise   Entreprise?    @relation(fields: [entrepriseId], references: [id])
   entrepriseId  Int?
   user          User          @relation(fields: [userId], references: [id])

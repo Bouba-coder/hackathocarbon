@@ -13,7 +13,7 @@ export default async function consultantsSeeder() {
             competences: ['Javascript', 'React', 'NodeJS'],
             level: 3,
             salaire: 30000,
-            experiences: JSON.stringify([
+            experiences: [
                 {
                     titre: 'Développeur',
                     entreprise: 'Apple',
@@ -26,8 +26,8 @@ export default async function consultantsSeeder() {
                     description: 'Développement de l\'application Microsoft Teams',
                     duree: 24,
                 },
-            ]),
-            parcours: JSON.stringify([
+            ],
+            parcours: [
                 {
                     titre: 'Bac S',
                     etablissement: 'Lycée de la ville',
@@ -46,7 +46,7 @@ export default async function consultantsSeeder() {
                     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae eros vitae nisl ultricies ul trices.',
                     duree: 1,
                 }
-            ]),
+            ],
             entreprise: 'Apple',
             user: {
                 id: 1,
@@ -60,7 +60,7 @@ export default async function consultantsSeeder() {
             competences: ['Javascript', 'React', 'NodeJS'],
             level: 6,
             salaire: 50000,
-            experiences: JSON.stringify([
+            experiences:[
                 {
                     titre: 'Développeur',
                     entreprise: 'Apple',
@@ -73,8 +73,8 @@ export default async function consultantsSeeder() {
                     description: 'Développement de l\'application Microsoft Teams',
                     duree: 24,
                 },
-            ]),
-            parcours: JSON.stringify([
+            ],
+            parcours: [
                 {
                     titre: 'Bac S',
                     etablissement: 'Lycée de la ville',
@@ -93,7 +93,7 @@ export default async function consultantsSeeder() {
                     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae eros vitae nisl ultricies ul trices.',
                     duree: 1,
                 }
-            ]),
+            ],
             entreprise: 'Dell',
             user: {
                 id: 2,
@@ -105,7 +105,15 @@ export default async function consultantsSeeder() {
         data.map(async (consultant) => {
             await prisma.consultant.upsert({
                 where: { userId: consultant.user.id },
-                update: {},
+                update: {
+                    ...consultant,
+                    entreprise: {
+                        connect: { nom: consultant.entreprise },
+                    },
+                    user: {
+                        connect: { id: consultant.user.id },
+                    },
+                },
                 create: {
                     ...consultant,
                     entreprise: {

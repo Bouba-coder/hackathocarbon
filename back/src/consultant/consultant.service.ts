@@ -10,7 +10,25 @@ export class ConsultantService {
   async create(createConsultantDto: CreateConsultantDto) {
     const consultant = await this.prisma.consultant.create({
       data: {
-        ...createConsultantDto,
+        metier: createConsultantDto.metier,
+        secteur: createConsultantDto.secteur,
+        disponibilite: createConsultantDto.disponibilite,
+        perimetre: createConsultantDto.perimetre,
+        competences: createConsultantDto.competences,
+        level: createConsultantDto.level,
+        salaire: createConsultantDto.salaire,
+        experiences: createConsultantDto.experiences,
+        parcours: createConsultantDto.parcours,
+        entreprise: {
+          connect: {
+            id: createConsultantDto.entrepriseId,
+          },
+        },
+        user: {
+          connect: {
+            id: createConsultantDto.userId,
+          },
+        },
       },
     });
 
@@ -58,7 +76,25 @@ export class ConsultantService {
         id: id,
       },
       data: {
-        ...updateConsultantDto,
+        metier: updateConsultantDto.metier,
+        secteur: updateConsultantDto.secteur,
+        disponibilite: updateConsultantDto.disponibilite,
+        perimetre: updateConsultantDto.perimetre,
+        competences: updateConsultantDto.competences,
+        level: updateConsultantDto.level,
+        salaire: updateConsultantDto.salaire,
+        experiences: updateConsultantDto.experiences,
+        parcours: updateConsultantDto.parcours,
+        entreprise: {
+          connect: {
+            id: updateConsultantDto.entrepriseId,
+          },
+        },
+        user: {
+          connect: {
+            id: updateConsultantDto.userId,
+          },
+        },
       },
     });
 
