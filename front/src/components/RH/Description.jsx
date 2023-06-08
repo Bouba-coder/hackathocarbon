@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import Title from "../Title";
 import Paper from "@mui/material/Paper";
 
-const CardStat = ({ title, number, arrived }) => {
+const Description = ({ title, firstName, lastName, email, arrived }) => {
   return (
     <React.Fragment>
         <Paper
@@ -18,20 +18,25 @@ const CardStat = ({ title, number, arrived }) => {
         >
           <Title>{title}</Title>
           <Typography component="p" variant="h4">
-            {number}
+            {firstName} {lastName}
           </Typography>
           <Typography color="text.secondary" sx={{ flex: 1 }}>
-            +{arrived} arrivés ce mois-ci
+            {email}
+          </Typography>
+          <Typography color="text.secondary" sx={{ flex: 1 }}>
+            Arrivé le {arrived}
           </Typography>
         </Paper>
     </React.Fragment>
   );
 };
 
-CardStat.propTypes = {
+Description.propTypes = {
   title: PropTypes.string.isRequired,
-  number: PropTypes.number.isRequired,
-  arrived: PropTypes.number.isRequired,
+  firstName: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  arrived: PropTypes.string.isRequired,
 };
 
-export default CardStat;
+export default Description;
