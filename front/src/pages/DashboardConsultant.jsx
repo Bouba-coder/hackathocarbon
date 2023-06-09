@@ -1,9 +1,7 @@
 import * as React from "react";
-import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
-import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
@@ -11,107 +9,102 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import {secondaryListItemsConsultant, mainListItemsConsultant} from "../components/ListItems";
-import Competences from "../components/Competences";
 import { useState, useEffect } from "react";
 import { getConsultants, getConsultantById } from "../utils/api";
-import ProfilConsultant from '../components/Profil'
-import Experiences from "../components/Experirences";
+//import ProfilConsultant from '../components/Profil'
+import Experiences from "../components/Consultant/Experirences";
+import Copyright from "../components/Copyright";
+import AppBar from "../components/AppBar";
+import Drawer from "../components/Drawer";
+import ProfilConsultant from "../components/Consultant/Profil";
+import Formation from "../components/Consultant/Formation";
+import ConsultantForm from "../components/Consultant/AddInformation";
+import Forum from "../components/Consultant/Forum";
+import { ListItemButton, ListItemIcon, ListItemText, ListSubheader } from "@mui/material";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import CorporateIcon from "@mui/icons-material/CorporateFare";
+import PeopleIcon from "@mui/icons-material/People";
+import ProfileIcon from "@mui/icons-material/AccountCircle";
 
-function Copyright(props) {
+//main menu consultant
+const sideMenuConsultant = (handleDisplay) => {
+  const itemsConsultant = [
+    {
+      onClick: () => handleDisplay(<Formation />),
+      icon: <DashboardIcon />,
+      text: 'Formation'
+    },
+    {
+      onClick: () => handleDisplay(<ConsultantForm />),
+      icon: <CorporateIcon />,
+      text: 'Experiences'
+    },
+    {
+      onClick: () => handleDisplay(<Forum />),
+      icon: <PeopleIcon />,
+      text: 'Forum'
+    }
+  ];
+
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
+    <>
+      {itemsConsultant.map((item, index) => (
+        <ListItemButton key={index} onClick={item.onClick}>
+          <ListItemIcon>{item.icon}</ListItemIcon>
+          <ListItemText primary={item.text} />
+        </ListItemButton>
+      ))}
+    </>
   );
-}
+};
+//secondary menu consultant
+const secondMenuConsultant = (handleDisplay, data) => {
+  const secondaryItemsRH = [
+    {
+      onClick: () => handleDisplay(<ProfilConsultant  consultant={ data } />),
+      icon: <ProfileIcon />,
+      text: 'Profil'
+    }
+  ];
 
-const drawerWidth = 240;
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(["width", "margin"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
-
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  "& .MuiDrawer-paper": {
-    position: "relative",
-    whiteSpace: "nowrap",
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    boxSizing: "border-box",
-    ...(!open && {
-      overflowX: "hidden",
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      width: theme.spacing(7),
-      [theme.breakpoints.up("sm")]: {
-        width: theme.spacing(9),
-      },
-    }),
-  },
-}));
-
+  return (
+    <>
+      <ListSubheader component="div" inset>
+        Mon profil
+      </ListSubheader>
+      {secondaryItemsRH.map((item, index) => (
+        <ListItemButton key={index} onClick={item.onClick}>
+          <ListItemIcon>{item.icon}</ListItemIcon>
+          <ListItemText primary={item.text} />
+        </ListItemButton>
+      ))}
+    </>
+  );
+};
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
-
 export default function DashboardConsultant() {
-
-  //get data from api
-const [data, setData] = useState([])
+//get consultant
 const [consultant, setConsultant] = useState({})
-const [loading, setLoading] = useState(true)
-useEffect(() => {
-  getConsultants().then((res)=>{
-    console.log("get consultant", res)
-    setData(res)
-  })
+const [open, setOpen] = React.useState(true); 
 
+useEffect(() => {
   getConsultantById(1).then((res)=>{
     console.log("get consultant +++++ by id", res)
     setConsultant(res)
   })
 }, []);
 
-  const [open, setOpen] = React.useState(true);
+  const [display, setDisplay] = React.useState(<Formation />);
+  
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+  const handleDisplay = (display) => {
+    setDisplay(display);
   };
 
   return (
@@ -121,7 +114,7 @@ useEffect(() => {
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
-              pr: "24px", // keep right padding when drawer closed
+              pr: "24px",
             }}
           >
             <IconButton
@@ -167,9 +160,9 @@ useEffect(() => {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItemsConsultant}
+            { sideMenuConsultant(handleDisplay) }
             <Divider sx={{ my: 1 }} />
-            {secondaryListItemsConsultant}
+            { secondMenuConsultant(handleDisplay, consultant) }
           </List>
         </Drawer>
         <Box
@@ -186,31 +179,7 @@ useEffect(() => {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                  <ProfilConsultant  consultant = { consultant } />
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 240,
-                  }}
-                >
-                  <Competences data={ consultant?.competences } />
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  <Experiences />
-                </Paper>
-              </Grid>
-            </Grid>
+            {display}
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>

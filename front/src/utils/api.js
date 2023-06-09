@@ -12,3 +12,9 @@ export const getConsultantById = async (id) => {
     const response = await axios.get(`http://localhost:3000/consultant/${id}`)
     return response.data
 }
+
+//get all formations
+export const getFormations = async () => {
+    const response = await axios.get('http://localhost:3000/formations')
+    return response.data
+}

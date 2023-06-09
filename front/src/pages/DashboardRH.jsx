@@ -26,7 +26,6 @@ import ListConsultants from "../components/RH/ListConsultants";
 import ListCompanies from "../components/RH/ListCompanies";
 import ListTrainings from "../components/RH/ListTrainings";
 import HomeRH from "../components/RH/HomeRH";
-import Profile from "../components/Profile";
 import Copyright from "../components/Copyright";
 import AppBar from "../components/AppBar";
 import Drawer from "../components/Drawer";
@@ -70,7 +69,7 @@ const mainListItemsRH = (handleDisplay) => {
 const secondaryListItemsRH = (handleDisplay) => {
   const secondaryItemsRH = [
     {
-      onClick: () => handleDisplay(<Profile />),
+      onClick: () => handleDisplay(<ListTrainings />),
       icon: <ProfileIcon />,
       text: 'Profile'
     }
