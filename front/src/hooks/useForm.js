@@ -11,12 +11,13 @@ const useForm = (initialValues, onSubmit) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const formErrors = validate(values);
-        setErrors(formErrors);
+        // const formErrors = validate(values);
+        // setErrors(formErrors);
 
-        if (Object.keys(formErrors).length === 0) {
+        // if (Object.keys(formErrors).length === 0) {
+        //     onSubmit(values);
+        // }
         onSubmit(values);
-        }
     };
 
     return {
