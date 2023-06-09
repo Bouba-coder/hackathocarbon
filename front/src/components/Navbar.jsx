@@ -13,26 +13,11 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 
 const pages = ["login", "contact"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
-const theme = createTheme({
-  palette: {
-    primary: {
-      light: "#E53F49",
-      main: "#282B2A",
-      dark: "#5B98D2",
-      contrastText: "#fff",
-    },
-    secondary: {
-      light: "#00BB7E",
-      main: "#FDFDFD",
-      dark: "#5B98D2",
-      contrastText: "#000",
-    },
-  },
-});
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -52,6 +37,8 @@ function NavBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const theme = useTheme();
 
   return (
     <AppBar>
