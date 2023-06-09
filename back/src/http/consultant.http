@@ -16,19 +16,52 @@ Content-Type: application/json
 POST {{ baseURL }}/consultant
 Content-Type: application/json
 
-{
-  "email" : "lassana11@gmail.fr",
-  "metier": "testeeurrrr",
-  "secteur": "banquerr",
-  "disponibilite": "SIX_MOIS",
-  "perimetre": "3 km",
-  "competences": ["java", "test"],
-  "experiences" : ["experiences 1", "expériences 2"],
-  "formations" :  ["Formaton java", "Formation Python"],
-  "actuel_entrepriseId" : 1,
-  "level": 2,
-  "salaire": 3000,
-  "user_id": 1
+{ 
+  "metier": "Développeur",
+  "secteur": "Informatique",
+  "disponibilite": "Immédiate",
+  "perimetre": "Régional",
+  "competences": ["Javascript", "React", "NodeJS"],
+  "level": 3,
+  "salaire": 30000,
+  "experiences": [
+      {
+          "titre": "Développeur",
+          "entreprise": "Apple",
+          "description": "Développement de l'application Apple Music",
+          "duree": 12
+      },
+      {
+          "titre": "Développeur backend",
+          "entreprise": "Microsoft",
+          "description": "Développement de l'application Microsoft Teams",
+          "duree": 24
+      }
+  ],
+  "parcours": [
+      {
+          "titre": "Bac S",
+          "etablissement": "Lycée de la ville",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae eros vitae nisl ultricies ul trices.",
+          "duree": 3
+      },
+      {
+          "titre": "BTS SIO",
+          "etablissement": "Lycée de la ville",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae eros vitae nisl ultricies ul trices.",
+          "duree": 2
+      },  
+      {
+          "titre": "Licence informatique",
+          "etablissement": "Université de la ville",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae eros vitae nisl ultricies ul trices.",
+          "duree": 1
+      }
+  ],
+  "entreprise": "Apple",
+  "user": {
+      "id": 1,
+  }
 }
 
 ###
