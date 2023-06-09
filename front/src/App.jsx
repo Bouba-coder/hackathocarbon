@@ -1,5 +1,7 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "./components/Palette";
 import NavBar from "./components/Navbar";
 import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
@@ -9,16 +11,18 @@ import DashboardRH from "./pages/DashboardRH";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      {<NavBar />}
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="dashboard" element={<DashboardRH />} />
-        <Route path="*" element={<NoPage />} />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        {<NavBar />}
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="dashboard" element={<DashboardRH />} />
+          <Route path="*" element={<NoPage />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
