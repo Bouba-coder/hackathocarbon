@@ -12,18 +12,18 @@ datasource db {
 
 // shemat User -- on change le role users pour que le rh soit rh
 model User {
-  id         Int          @id @default(autoincrement())
-  email      String       @unique
+  id         Int           @id @default(autoincrement())
+  email      String        @unique
   firstName  String
   lastName   String
   password   String
-  role       Role         @default(CONSULTANT)
-  consultant Consultant? 
+  role       Role          @default(CONSULTANT)
+  consultant Consultant?
   formation  Formation[]
   article    Article[]
   comment    Commentaire[]
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @updatedAt
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
 }
 
 enum Role {
@@ -35,25 +35,25 @@ enum Role {
 model Entreprise {
   id         Int          @id @default(autoincrement())
   nom        String       @unique
-  contact    String?      
+  contact    String?
   consultant Consultant[]
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
 }
 
 model Formation {
-  id          Int          @id @default(autoincrement())
-  nom         String       @unique
+  id          Int      @id @default(autoincrement())
+  nom         String   @unique
   niveau      String?
   description String?
   duree       Int?
   users       User[]
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Consultant {
-  id            Int           @id @default(autoincrement())
+  id            Int         @id @default(autoincrement())
   metier        String?
   secteur       String?
   disponibilite String?
@@ -63,31 +63,31 @@ model Consultant {
   salaire       Int?
   experiences   Json[]
   parcours      Json[]
-  entreprise   Entreprise?    @relation(fields: [entrepriseId], references: [id])
+  entreprise    Entreprise? @relation(fields: [entrepriseId], references: [id])
   entrepriseId  Int?
-  user          User          @relation(fields: [userId], references: [id])
-  userId        Int           @unique
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  user          User        @relation(fields: [userId], references: [id])
+  userId        Int         @unique
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
 }
 
 model Article {
-  id       Int    @id @default(autoincrement())
-  title    String
-  content  String
-  category String
-  author   User   @relation(fields: [authorId], references: [id])
-  authorId Int
-  comment  Commentaire[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int           @id @default(autoincrement())
+  title     String
+  content   String
+  category  String
+  author    User          @relation(fields: [authorId], references: [id])
+  authorId  Int
+  comment   Commentaire[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
 }
 
 model Commentaire {
-  id       Int    @id @default(autoincrement())
-  content  String
-  author   User   @relation(fields: [authorId], references: [id])
-  authorId Int
-  article  Article @relation(fields: [articleId], references: [id])
+  id        Int     @id @default(autoincrement())
+  content   String
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  Int
+  article   Article @relation(fields: [articleId], references: [id])
   articleId Int
 }
