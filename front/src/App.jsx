@@ -1,5 +1,7 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "@mui/material/styles";
+import { themeNav } from "./components/Theme";
 import NavBar from "./components/Navbar";
 import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
@@ -10,12 +12,14 @@ import DashboardConsultant from "./pages/DashboardConsultant";
 import CreateConsultant from "./pages/consultant/Create";
 import UpdateConsultant from "./pages/consultant/Update";
 import useAuth from "./hooks/useAuth";
+import Forum from "./components/Consultant/Forum";
 
 export default function App() {
   useAuth();
   
   return (
-    <BrowserRouter>
+    <ThemeProvider theme={themeNav}>
+          <BrowserRouter>
       {<NavBar />}
       <Routes>
         <Route index element={<Home />} />
@@ -28,6 +32,7 @@ export default function App() {
         <Route path="*" element={<NoPage />} />
       </Routes>
     </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

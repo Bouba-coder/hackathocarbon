@@ -1,4 +1,3 @@
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -7,43 +6,13 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Snackbar from '@mui/material/Snackbar';
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import React, { useState, useEffect } from 'react';
+import { ThemeProvider } from "@mui/material/styles";
+import { themeLogin } from "../components/Theme";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
-
-// function Copyright(props) {
-//   return (
-//     <Typography
-//       variant="body2"
-//       color="text.secondary"
-//       align="center"
-//       {...props}
-//     >
-//       {"Copyright © "}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
-
-const defaultTheme = createTheme({
-  palette: {
-    primary: {
-      main: "#00BB7E",
-    },
-    secondary: {
-      main: "#E53F49",
-    },
-  },
-});
+import Snackbar from '@mui/material/Snackbar';
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -58,18 +27,12 @@ export default function SignIn() {
   });
   const { vertical, horizontal, open, message } = state;
 
-  // useEffect(() => {
-  //   const storedToken = localStorage.getItem('token');
-  //   if (storedToken) {
-  //     setToken(storedToken);
-  //   }
-  // }, []);
-
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/auth/login', {
-        email: username,
-        password: password,
+      const response = await fetch('http://localhost:3000/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: username, password: password }),
       });
 
       localStorage.setItem('token', response.data.access_token);
@@ -104,8 +67,8 @@ export default function SignIn() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs" sx={{ alignItems: "center" }}>
+    <ThemeProvider theme={themeLogin}>
+      <Container component="main" maxWidth="xs" sx={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh" }}>
         <CssBaseline />
         <Box
           sx={{
@@ -115,9 +78,9 @@ export default function SignIn() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
-          </Avatar>
+          </Avatar> */}
           <Typography component="h1" variant="h5">
             Connexion
           </Typography>
@@ -151,10 +114,6 @@ export default function SignIn() {
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="current-password"
             />
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
             <Button
               type="submit"
               fullWidth
@@ -163,21 +122,8 @@ export default function SignIn() {
             >
               Envoyer
             </Button>
-            {/* <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid> */}
           </Box>
         </Box>
-        {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
       </Container>
       <Snackbar
         anchorOrigin={{ vertical, horizontal }}
