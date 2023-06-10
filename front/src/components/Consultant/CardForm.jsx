@@ -16,13 +16,13 @@ const CardForm = ({ title, description, duree, niveau, contact }) => {
     console.log("value", value)
     useEffect(() => {
         if(niveau == "Expert"){
-            setValue(3)
+            setValue(5)
         } 
         if(niveau == "Senior"){
-            setValue(2)
+            setValue(3)
         }
         if(niveau == "Junior"){
-            setValue(1)
+            setValue(2)
         }
     }, []);
     
@@ -46,11 +46,7 @@ const CardForm = ({ title, description, duree, niveau, contact }) => {
                     {description}
                 </Typography>
                 <Typography component="legend">Niveau : {niveau}</Typography>
-                        <Rating
-                        name="simple-controlled"
-                        value={value}
-                        readOnly />
-                        
+                    <Rating name="simple-controlled" value={value} readOnly />                       
             </CardContent>
                 <CardActions>              
                 <Button size="small" href={contact}>Contacter</Button>

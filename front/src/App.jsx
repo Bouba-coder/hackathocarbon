@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Contact from "./pages/Contact";
 import DashboardRH from "./pages/DashboardRH";
 import DashboardConsultant from "./pages/DashboardConsultant";
+import Forum from "./components/Consultant/Forum";
 
 export default function App() {
   return (

@@ -12,17 +12,27 @@ GET {{ baseURL }}/article/1
 Content-Type: application/json
 
 ###
-# create article
+# create commentaire
+POST {{ baseURL }}/commentaire
+Content-Type: application/json
+
+{
+  "content": "Ceci est le contenu de mon premier article, car j'ai commencé mon deuxième artcile.",
+  "authorId": 1,
+  "articleId": 2
+}
+
+###
+# create comment
 POST {{ baseURL }}/article
 Content-Type: application/json
 
 {
-  "title" : "Boubacariii@gmail.fr",
-  "content": "testeeurrrr",
-  "category": "forum tag",
-  "authorId": 1
+  "title" : "Mon premier article du vendredi",
+  "content": "Ceci est le contenu de mon premier article, car j'ai commencé mon deuxième artcile.",
+  "category": "Technologie",
+  "authorId": 3
 }
-
 ###
 # update article
 PATCH  {{ baseURL }}/article/2
