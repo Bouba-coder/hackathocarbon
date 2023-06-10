@@ -92,7 +92,8 @@ const [consultant, setConsultant] = useState({})
 const [open, setOpen] = React.useState(true); 
 
 useEffect(() => {
-  getConsultantById(1).then((res)=>{
+  const userId = localStorage.getItem("currentUser")
+  getConsultantById(userId).then((res)=>{
     console.log("get consultant +++++ by id", res)
     setConsultant(res)
   })

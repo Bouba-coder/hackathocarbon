@@ -1,8 +1,9 @@
 import MyProfile from "../../components/Consultant/forms/MyProfile";
 import { useEffect, useState } from "react";
+import useConsultant from "../../hooks/useConsultant";
 
 const UpdateConsultant = () => {
-    const [isFormValue, setFormValue] = useState({
+    const initValues = {
         metier: null,
         secteur: null,
         disponibilite: null,
@@ -12,38 +13,36 @@ const UpdateConsultant = () => {
         salaire: null,
         experiences: [],
         parcours: [],
-        entreprise: null,
+        entrepriseId: null,
         userId: Number(localStorage.getItem("currentUser")),
-    });
+    };
+    const [isFormValue, setFormValue] = useState(initValues);
+
+    const { item, updateItem } = useConsultant(`http://localhost:3000/consultant`);
+    console.log("item", item);
 
     useEffect(() => {
-        const userId = localStorage.getItem("currentUser");
-        const fetchUser = async () => {
-        try {
-            const response = await fetch(`http://localhost:3000/consultant/${userId}`);
-            if (!response.ok) {
-            throw new Error("Failed to fetch user data");
-            }
-            const data = await response.json();
-            setFormValue(data);
-        } catch (error) {
-            console.error(error);
+        if (item) {
+            setFormValue({
+                metier: item.metier,
+                secteur: item.secteur,
+                disponibilite: item.disponibilite,
+                perimetre: item.perimetre,
+                competences: item.competences,
+                level: item.level,
+                salaire: item.salaire,
+                experiences: item.experiences,
+                parcours: item.parcours,
+                entrepriseId: item.entrepriseId,
+                userId: item.userId,
+            });
         }
-        };
-        fetchUser();
-    }, []);
+    }, [item]);
 
     const handleSubmit = (values) => {
         const userId = localStorage.getItem("currentUser");
-        const req = fetch(`http://localhost:3000/consultant/${userId}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-        });
-        console.log(values);    
-        console.log(req);
+        updateItem(userId, values);
+        console.log("patch", values);
     };
 
     return (

@@ -17,6 +17,9 @@ function MyProfile({ initialValues, onSubmit }) {
     return (
         <div>
             {JSON.stringify(values)}
+            <h2 className="text-center text-3xl leading-9 font-extrabold text-gray-900">
+                Mon dossier candidat
+            </h2>
             <form onSubmit={handleSubmit} className="px-8 py-6">
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -80,7 +83,7 @@ function MyProfile({ initialValues, onSubmit }) {
                         </label>
                         <select 
                             id="entreprise"
-                            name="entreprise"
+                            name="entrepriseId"
                             value={values.entreprise}
                             onChange={handleChange} 
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

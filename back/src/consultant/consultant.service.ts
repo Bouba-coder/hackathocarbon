@@ -61,7 +61,7 @@ export class ConsultantService {
   async update(id: number, updateConsultantDto: UpdateConsultantDto) {
     const consultant = await this.prisma.consultant.findUnique({
       where: {
-        id: id,
+        userId: id,
       },
     });
 
@@ -69,7 +69,7 @@ export class ConsultantService {
 
     const updatedConsultant = await this.prisma.consultant.update({
       where: {
-        id: id,
+        userId: id,
       },
       data: {
         metier: updateConsultantDto.metier,
@@ -81,11 +81,7 @@ export class ConsultantService {
         salaire: updateConsultantDto.salaire,
         experiences: updateConsultantDto.experiences,
         parcours: updateConsultantDto.parcours,
-        entreprise: {
-          connect: {
-            id: updateConsultantDto.entrepriseId,
-          },
-        },
+        entreprise: updateConsultantDto.entrepriseId == null ? {} : { connect: { id: updateConsultantDto.entrepriseId } },
         user: {
           connect: {
             id: updateConsultantDto.userId,
@@ -100,7 +96,7 @@ export class ConsultantService {
   async remove(id: number) {
     const consultant = await this.prisma.consultant.findUnique({
       where: {
-        id: id,
+        userId: id,
       },
     });
 
@@ -108,7 +104,7 @@ export class ConsultantService {
 
     const deletedConsultant = await this.prisma.consultant.delete({
       where: {
-        id: id,
+        userId: id,
       },
     });
 

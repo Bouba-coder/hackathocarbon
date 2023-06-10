@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 
-const useCRUD = (apiEndpoint) => {
+const useConsultant = (apiEndpoint) => {
     const [data, setData] = useState([]);
+    const [item, setItem] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -24,8 +25,24 @@ const useCRUD = (apiEndpoint) => {
         }
     };
 
+    const getById = async (itemId) => {
+        try {
+        setLoading(true);
+        const response = await fetch(`${apiEndpoint}/${itemId}`, { headers });
+        const itemData = await response.json();
+        setItem(itemData);
+        setError(null);
+        return itemData;
+        } catch (error) {
+        setError('Une erreur est survenue lors de la récupération de l\'élément.');
+        } finally {
+        setLoading(false);
+        }
+    };
+
     useEffect(() => {
         fetchData();
+        getById(localStorage.getItem("currentUser"));
     }, []);
 
     const createItem = async (newItem) => {
@@ -50,7 +67,7 @@ const useCRUD = (apiEndpoint) => {
         try {
         setLoading(true);
         const response = await fetch(`${apiEndpoint}/${itemId}`, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: headers,
             body: JSON.stringify(updatedItem),
         });
@@ -86,10 +103,11 @@ const useCRUD = (apiEndpoint) => {
         data,
         loading,
         error,
+        item,
         createItem,
         updateItem,
         deleteItem,
     };
 };
 
-export default useCRUD;
+export default useConsultant;
