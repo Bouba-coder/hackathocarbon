@@ -1,4 +1,3 @@
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -10,6 +9,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Copyright from "../components/Copyright";
+import { ThemeProvider } from "@mui/material/styles";
+import { themeLogin } from "../components/Theme";
 
 export default function SignIn() {
   const handleSubmit = (event) => {
@@ -22,6 +23,7 @@ export default function SignIn() {
   };
 
   return (
+    <ThemeProvider theme={themeLogin}>
     <Container component="main" maxWidth="xs" sx={{ alignItems: "center" }}>
       <CssBaseline />
       <Box
@@ -32,7 +34,7 @@ export default function SignIn() {
           alignItems: "center",
         }}
       >
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h4">
           Sign in
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -74,15 +76,11 @@ export default function SignIn() {
                 Forgot password?
               </Link>
             </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
           </Grid>
         </Box>
       </Box>
       <Copyright sx={{ mt: 8, mb: 4 }} />
     </Container>
+    </ThemeProvider>
   );
 }

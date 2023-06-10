@@ -6,6 +6,12 @@ export const redCarbon = "#E53F49";
 export const greenCarbon = "#00BB7E";
 export const blueCarbon = "#5B98D2";
 
+export const font = createTheme({
+  typography: {
+    fontFamily: "Calibri",
+  },
+});
+
 export const themeNav = createTheme({
   palette: {
     primary: {
@@ -15,6 +21,9 @@ export const themeNav = createTheme({
 });
 
 export const themeNavItem = createTheme({
+  Typography: {
+    fontFamily: font,
+  },
   palette: {
     primary: {
       main: greenCarbon,
@@ -24,3 +33,15 @@ export const themeNavItem = createTheme({
     },
   },
 });
+
+export const themeLogin = createTheme({
+  Typography: {
+    fontFamily: font,
+  },
+  palette: {
+    primary: {
+      main: greyCarbon,
+    },
+  },
+});
+

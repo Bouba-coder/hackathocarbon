@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
-import { themeNav } from "./components/Palette";
+import { themeNav } from "./components/Theme";
 import NavBar from "./components/Navbar";
 import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";

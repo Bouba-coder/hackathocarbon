@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { greenCarbon, redCarbon } from "./Palette";
+import { greenCarbon, redCarbon } from "./Theme";
 const DividerComponent = () => {
   return (
     <Box

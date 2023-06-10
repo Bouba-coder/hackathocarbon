@@ -30,28 +30,35 @@ import Profile from "../components/RH/Profile";
 import Copyright from "../components/Copyright";
 import AppBar from "../components/AppBar";
 import Drawer from "../components/Drawer";
+import DividerComponent from "../components/DividerComponent";
+import CardMedia from "@mui/material/CardMedia";
 
 const mainListItemsRH = (handleDisplay) => {
+  const dashboard = "Tableau de bord";
+  const companies = "Nos clients";
+  const consultants = "Nos Consultants";
+  const trainings = "Nos formations";
+
   const itemsRH = [
     {
-      onClick: () => handleDisplay(<HomeRH />),
+      onClick: () => handleDisplay(<HomeRH />, dashboard),
       icon: <DashboardIcon />,
-      text: "Dashboard",
+      text: dashboard,
     },
     {
-      onClick: () => handleDisplay(<ListCompanies />),
+      onClick: () => handleDisplay(<ListCompanies />, companies),
       icon: <CorporateIcon />,
-      text: "Companies",
+      text: companies,
     },
     {
-      onClick: () => handleDisplay(<ListConsultants />),
+      onClick: () => handleDisplay(<ListConsultants />, consultants),
       icon: <PeopleIcon />,
-      text: "Consultants",
+      text: consultants,
     },
     {
-      onClick: () => handleDisplay(<ListTrainings />),
+      onClick: () => handleDisplay(<ListTrainings />, trainings),
       icon: <AssignmentIcon />,
-      text: "Trainings",
+      text: trainings,
     },
   ];
 
@@ -68,11 +75,13 @@ const mainListItemsRH = (handleDisplay) => {
 };
 
 const secondaryListItemsRH = (handleDisplay) => {
+  const profile = "Mon profil";
+
   const secondaryItemsRH = [
     {
-      onClick: () => handleDisplay(<Profile />),
+      onClick: () => handleDisplay(<Profile />, profile),
       icon: <ProfileIcon />,
-      text: "Profile",
+      text: profile,
     },
   ];
 
@@ -94,14 +103,16 @@ const secondaryListItemsRH = (handleDisplay) => {
 const DashboardRH = () => {
   const [open, setOpen] = React.useState(true);
   const [display, setDisplay] = React.useState(<HomeRH />);
+  const [title, setTitle] = React.useState("Tableau de bord");
   const theme = useTheme();
 
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
-  const handleDisplay = (display) => {
+  const handleDisplay = (display, title) => {
     setDisplay(display);
+    setTitle(title);
   };
 
   return (
@@ -133,7 +144,7 @@ const DashboardRH = () => {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              {title}
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -141,6 +152,7 @@ const DashboardRH = () => {
               </Badge>
             </IconButton>
           </Toolbar>
+          <DividerComponent />
         </AppBar>
         <Drawer variant="permanent" open={open}>
           <Toolbar
