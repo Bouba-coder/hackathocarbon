@@ -3,6 +3,8 @@ import usersSeeder from './users.seeder';
 import entreprisesSeeder from './entreprises.seeder';
 import formationsSeeder from './formations.seeder';
 import consultantsSeeder from './consultants.seeder';
+import articleSeeder from './article.seeder';
+import commentaireSeeder from './commentaire.seeder';
 
 const prisma = new PrismaClient();
 
@@ -11,6 +13,8 @@ async function main() {
     await entreprisesSeeder();
     await formationsSeeder();
     await consultantsSeeder();
+    await articleSeeder();
+    await commentaireSeeder();
 }
 
 main()

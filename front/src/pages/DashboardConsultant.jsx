@@ -49,6 +49,7 @@ const sideMenuConsultant = (handleDisplay) => {
     }
   ];
 
+
   return (
     <>
       {itemsConsultant.map((item, index) => (

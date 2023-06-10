@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Contact from "./pages/Contact";
 import DashboardRH from "./pages/DashboardRH";
 import DashboardConsultant from "./pages/DashboardConsultant";
+import Forum from "./components/Consultant/Forum";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="dashboard" element={<DashboardRH />} />
         <Route path="consultant" element={<DashboardConsultant />} />
+        <Route path="forum" element={<Forum />} />
         <Route path="*" element={<NoPage />} />
       </Routes>
     </BrowserRouter>
