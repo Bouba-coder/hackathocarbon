@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -85,13 +85,11 @@ const secondMenuConsultant = (handleDisplay, data) => {
     </>
   );
 };
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
 export default function DashboardConsultant() {
 //get consultant
 const [consultant, setConsultant] = useState({})
 const [open, setOpen] = React.useState(true); 
-
+const theme = useTheme();
 useEffect(() => {
   getConsultantById(1).then((res)=>{
     console.log("get consultant +++++ by id", res)
@@ -109,7 +107,7 @@ useEffect(() => {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
