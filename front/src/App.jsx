@@ -7,9 +7,11 @@ import Login from "./pages/Login";
 import Contact from "./pages/Contact";
 import DashboardRH from "./pages/DashboardRH";
 import DashboardConsultant from "./pages/DashboardConsultant";
+import "./App.css";
 
 export default function App() {
   return (
+    <div>
     <BrowserRouter>
       {<NavBar />}
       <Routes>
@@ -21,6 +23,7 @@ export default function App() {
         <Route path="*" element={<NoPage />} />
       </Routes>
     </BrowserRouter>
+    </div>
   );
 }
 

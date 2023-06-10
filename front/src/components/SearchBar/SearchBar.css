@@ -1,0 +1,20 @@
+/* SearchBar.css */
+
+.search-bar {
+  display: inline-block;
+  position: relative;
+}
+
+.search-bar input {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  width: 100%;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #6c63ff;
+  box-shadow: 0 0 4px rgba(108, 99, 255, 0.3);
+}
