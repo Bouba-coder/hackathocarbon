@@ -19,11 +19,7 @@ export class ConsultantService {
         salaire: createConsultantDto.salaire,
         experiences: createConsultantDto.experiences,
         parcours: createConsultantDto.parcours,
-        entreprise: {
-          connect: {
-            id: createConsultantDto.entrepriseId,
-          },
-        },
+        entreprise: createConsultantDto.entrepriseId == null ? {} : { connect: { id: createConsultantDto.entrepriseId } },
         user: {
           connect: {
             id: createConsultantDto.userId,
@@ -49,7 +45,7 @@ export class ConsultantService {
   async findOne(id: number) {
     const consultant = await this.prisma.consultant.findUnique({
       where: {
-        id: id,
+        userId: id,
       },
       include: {
         entreprise: true,

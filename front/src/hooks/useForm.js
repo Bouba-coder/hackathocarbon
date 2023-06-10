@@ -1,28 +1,38 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 const useForm = (initialValues, onSubmit) => {
     const [values, setValues] = useState(initialValues);
-    const [errors, setErrors] = useState({});
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setValues({ ...values, [name]: value });
-    };
+    const handleChange = useCallback((event) => {
+        const { name, value } = event.target;
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // const formErrors = validate(values);
-        // setErrors(formErrors);
+        if (name.includes('[')) {
+        const [fieldName, index] = name.split(/[\[\]]/).filter(Boolean);
+        const updatedValues = [...values[fieldName]];
+        updatedValues[index] = value;
 
-        // if (Object.keys(formErrors).length === 0) {
-        //     onSubmit(values);
-        // }
+        setValues((prevValues) => ({
+            ...prevValues,
+            [fieldName]: updatedValues,
+        }));
+        } else {
+        setValues((prevValues) => ({
+            ...prevValues,
+            [name]: value,
+        }));
+        }
+    }, [values]);
+
+    const handleSubmit = useCallback(
+        (event) => {
+        event.preventDefault();
         onSubmit(values);
-    };
+        },
+        [onSubmit, values]
+    );
 
     return {
         values,
-        errors,
         handleChange,
         handleSubmit,
     };
