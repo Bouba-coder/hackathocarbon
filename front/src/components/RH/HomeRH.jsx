@@ -16,20 +16,18 @@ const HomeRH = () => {
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={6}>
-          <CardStat title="Nombre de consultants" number="50" arrived="2" />
+          <CardStat title="Nombre de consultants" number={50} arrived={2} />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={6}>
           <CardStat
             title="Nombre d'entreprises partenaires"
-            number="10"
-            arrived="1"
+            number={50} arrived={2}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={6}>
           <CardStat
             title="Nombre de formations proposées"
-            number="50"
-            arrived="2"
+            number={50} arrived={2}
           />
         </Grid>
       </Grid>
