@@ -1,29 +1,40 @@
-import React from 'react';
-import { Grid, Card, CardMedia, CardContent, Typography, CardActions, Button } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Grid, Card, CardMedia } from '@mui/material';
+import CardbackImage from '../assets/image/Cardback.jpg';
+import { styled } from '@mui/material/styles';
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  transition: 'transform 0.6s',
+  transformStyle: 'preserve-3d',
+  '&.flipped': {
+    transform: 'rotateY(180deg)',
+  },
+}));
 
 const PokeCard = (props) => {
-  const { imageSrc, title, description } = props;
+  const { imageSrc, isCardFlipped } = props;
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  useEffect(() => {
+    setIsFlipped(isCardFlipped);
+  }, [isCardFlipped]);
+
+  const handleCardFlip = () => {
+    setIsFlipped(!isFlipped);
+  };
 
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <StyledCard className={`card ${isFlipped ? 'flipped' : ''}`} onClick={handleCardFlip}>
         <CardMedia
           component="img"
-          src={imageSrc}
-          alt="Card Image"
+          src={isFlipped ? CardbackImage : imageSrc}
+          alt={isFlipped ? 'Card Back Image' : 'Card Image'}
         />
-        <CardContent sx={{ flexGrow: 1 }}>
-          <Typography gutterBottom variant="h5" component="h2">
-            {title}
-          </Typography>
-          <Typography>
-            {description}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">View</Button>
-        </CardActions>
-      </Card>
+      </StyledCard>
     </Grid>
   );
 };
