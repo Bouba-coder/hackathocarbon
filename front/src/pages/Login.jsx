@@ -13,6 +13,7 @@ import { themeLogin } from "../components/Theme";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Snackbar from '@mui/material/Snackbar';
+import axios from 'axios';
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -29,14 +30,13 @@ export default function SignIn() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:3000/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: username, password: password }),
+      const response = await axios.post('http://localhost:3000/auth/login', {
+        email: username,
+        password: password,
       });
 
       localStorage.setItem('token', response.data.access_token);
-      console.log(response.data.access_token);
+      console.log(response);
 
       setState({ 
         open: true,
