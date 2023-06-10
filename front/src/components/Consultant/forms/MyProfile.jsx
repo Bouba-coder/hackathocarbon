@@ -18,7 +18,7 @@ function MyProfile({ initialValues, onSubmit }) {
         <div>
             {JSON.stringify(values)}
             <h2 className="text-center text-3xl leading-9 font-extrabold text-gray-900">
-                Mon dossier candidat
+                Mon dossier consultant
             </h2>
             <form onSubmit={handleSubmit} className="px-8 py-6">
                     <div className="mb-4">

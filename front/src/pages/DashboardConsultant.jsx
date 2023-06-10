@@ -25,15 +25,17 @@ import ConsultantForm from "../components/Consultant/AddInformation";
 import Forum from "../components/Consultant/Forum";
 import { ListItemButton, ListItemIcon, ListItemText, ListSubheader } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import CorporateIcon from "@mui/icons-material/CorporateFare";
+import FolderIcon from '@mui/icons-material/Folder';
 import PeopleIcon from "@mui/icons-material/People";
 import ProfileIcon from "@mui/icons-material/AccountCircle";
 import DividerComponent from "../components/DividerComponent";
+import LogoutIcon from '@mui/icons-material/Logout';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import { Link } from "react-router-dom";
 
 //main menu consultant
 const sideMenuConsultant = (handleDisplay) => {
   const trainings = "Formations";
-  const experiences = "Experiences";
   const forum = "Forum";
 
   const itemsConsultant = [
@@ -41,11 +43,6 @@ const sideMenuConsultant = (handleDisplay) => {
       onClick: () => handleDisplay(<Formation />, trainings),
       icon: <DashboardIcon />,
       text: 'Formation'
-    },
-    {
-      onClick: () => handleDisplay(<ConsultantForm />, experiences),
-      icon: <CorporateIcon />,
-      text: 'Experiences'
     },
     {
       onClick: () => handleDisplay(<Forum />, forum),
@@ -68,19 +65,25 @@ const sideMenuConsultant = (handleDisplay) => {
 };
 //secondary menu consultant
 const secondMenuConsultant = (handleDisplay, data) => {
-  const profile = "Mon Profil";
+  const profile = "Mon profil";
+  const experiences = "Mon dossier consultant";
   const secondaryItemsRH = [
     {
       onClick: () => handleDisplay(<ProfilConsultant  consultant={ data } />, profile),
       icon: <ProfileIcon />,
-      text: 'Profil'
-    }
+      text: 'Mon profil'
+    },
+    {
+      onClick: () => handleDisplay(<ConsultantForm />, experiences),
+      icon: <FolderIcon />,
+      text: 'Mon dossier'
+    },
   ];
 
   return (
     <>
-      <ListSubheader component="div" inset>
-        Mon profil
+      <ListSubheader component="div" sx={{ textAlign: "center" }}>
+        Mon espace personnel
       </ListSubheader>
       {secondaryItemsRH.map((item, index) => (
         <ListItemButton key={index} onClick={item.onClick}>
@@ -146,11 +149,11 @@ useEffect(() => {
             >
               {title}
             </Typography>
-            <IconButton color="inherit">
+            {/* <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
           </Toolbar>
           <DividerComponent />
         </AppBar>
@@ -169,9 +172,25 @@ useEffect(() => {
           </Toolbar>
           <Divider />
           <List component="nav">
+            <ListItemButton key={1}>
+                <ListItemIcon>
+                  <HomeRoundedIcon />
+                </ListItemIcon>
+              <Link to={`/`}>
+                <ListItemText primary="Page d'accueil" />
+              </Link>
+            </ListItemButton>
+            <Divider sx={{ my: 1 }} />
             { sideMenuConsultant(handleDisplay) }
             <Divider sx={{ my: 1 }} />
             { secondMenuConsultant(handleDisplay, consultant) }
+            <Divider sx={{ my: 1 }} />
+            <ListItemButton key={1}>
+                <ListItemIcon>
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText primary="Déconnexion" />
+            </ListItemButton>
           </List>
         </Drawer>
         <Box
