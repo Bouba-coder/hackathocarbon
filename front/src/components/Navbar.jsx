@@ -12,7 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Link from "@mui/material/Link";
 import AdbIcon from "@mui/icons-material/Adb";
 import { ThemeProvider } from "@mui/material/styles";
-import { themeNav } from "./Palette";
+import { themeNav } from "./Theme";
 import { capitalize } from "../utils/functions";
 import DividerComponent from "./DividerComponent";
 
