@@ -15,11 +15,11 @@ import CardImage3 from '../assets/image/Han.png';
 import CardImage4 from '../assets/image/Matthieu.png';
 import CardImage5 from '../assets/image/Jerome.png';
 import CardImage6 from '../assets/image/Sarah.png';
-import imageHome from '../assets/image/imageHome.jpg'
 import PokeCard from '../components/PokeCard';
 import './Home.css';
+/*import imageHome from '../assets/image/imageHome.jpg'*/
 
-// TODO remove, this demo shouldn't need to reset the theme.
+
 const theme =  createTheme({
   palette: {
     primary: {
@@ -66,9 +66,9 @@ export default function Home() {
         </Stack>
       </div>
       <img
-        /* src={imageHome} */
+        /* src={imageHome} 
         alt="Le signe que vous recherchiez"
-        className="image"
+        className="image"*/
       />
     </div>
   </Container>
