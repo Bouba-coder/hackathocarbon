@@ -31,7 +31,6 @@ import Copyright from "../components/Copyright";
 import AppBar from "../components/AppBar";
 import Drawer from "../components/Drawer";
 import DividerComponent from "../components/DividerComponent";
-import CardMedia from "@mui/material/CardMedia";
 
 const mainListItemsRH = (handleDisplay) => {
   const dashboard = "Tableau de bord";
