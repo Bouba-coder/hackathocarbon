@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -36,23 +36,23 @@ const mainListItemsRH = (handleDisplay) => {
     {
       onClick: () => handleDisplay(<HomeRH />),
       icon: <DashboardIcon />,
-      text: 'Dashboard'
+      text: "Dashboard",
     },
     {
       onClick: () => handleDisplay(<ListCompanies />),
       icon: <CorporateIcon />,
-      text: 'Companies'
+      text: "Companies",
     },
     {
       onClick: () => handleDisplay(<ListConsultants />),
       icon: <PeopleIcon />,
-      text: 'Consultants'
+      text: "Consultants",
     },
     {
       onClick: () => handleDisplay(<ListTrainings />),
       icon: <AssignmentIcon />,
-      text: 'Trainings'
-    }
+      text: "Trainings",
+    },
   ];
 
   return (
@@ -70,10 +70,10 @@ const mainListItemsRH = (handleDisplay) => {
 const secondaryListItemsRH = (handleDisplay) => {
   const secondaryItemsRH = [
     {
-      onClick: () => handleDisplay(<ListTrainings />),
+      onClick: () => handleDisplay(<Profile />),
       icon: <ProfileIcon />,
-      text: 'Profile'
-    }
+      text: "Profile",
+    },
   ];
 
   return (
@@ -91,12 +91,10 @@ const secondaryListItemsRH = (handleDisplay) => {
   );
 };
 
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
-
 const DashboardRH = () => {
   const [open, setOpen] = React.useState(true);
   const [display, setDisplay] = React.useState(<HomeRH />);
+  const theme = useTheme();
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -107,7 +105,7 @@ const DashboardRH = () => {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>

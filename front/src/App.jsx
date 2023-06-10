@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./components/Palette";
+import { themeNav } from "./components/Palette";
 import NavBar from "./components/Navbar";
 import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
@@ -12,7 +12,7 @@ import DashboardConsultant from "./pages/DashboardConsultant";
 
 export default function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themeNav}>
       <BrowserRouter>
         {<NavBar />}
         <Routes>
