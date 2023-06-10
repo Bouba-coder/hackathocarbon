@@ -1,7 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
-import Title from "../Title";
+import { Title } from "../Title";
 import Paper from "@mui/material/Paper";
 
 const CardStat = ({ title, number, arrived }) => {
@@ -21,7 +21,7 @@ const CardStat = ({ title, number, arrived }) => {
             {number}
           </Typography>
           <Typography color="text.secondary" sx={{ flex: 1 }}>
-            +{arrived} arrivés ce mois-ci
+            {arrived}
           </Typography>
         </Paper>
     </React.Fragment>

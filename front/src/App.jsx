@@ -1,5 +1,7 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "@mui/material/styles";
+import { themeNav } from "./components/Theme";
 import NavBar from "./components/Navbar";
 import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
@@ -11,19 +13,19 @@ import "./App.css";
 
 export default function App() {
   return (
-    <div>
-    <BrowserRouter>
-      {<NavBar />}
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="dashboard" element={<DashboardRH />} />
-        <Route path="consultant" element={<DashboardConsultant />} />
-        <Route path="*" element={<NoPage />} />
-      </Routes>
-    </BrowserRouter>
-    </div>
+    <ThemeProvider theme={themeNav}>
+      <BrowserRouter>
+        {<NavBar />}
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="dashboard" element={<DashboardRH />} />
+          <Route path="consultant" element={<DashboardConsultant />} />
+          <Route path="*" element={<NoPage />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

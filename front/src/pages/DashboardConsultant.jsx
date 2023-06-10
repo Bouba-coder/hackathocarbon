@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -28,26 +28,32 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import CorporateIcon from "@mui/icons-material/CorporateFare";
 import PeopleIcon from "@mui/icons-material/People";
 import ProfileIcon from "@mui/icons-material/AccountCircle";
+import DividerComponent from "../components/DividerComponent";
 
 //main menu consultant
 const sideMenuConsultant = (handleDisplay) => {
+  const trainings = "Formations";
+  const experiences = "Experiences";
+  const forum = "Forum";
+
   const itemsConsultant = [
     {
-      onClick: () => handleDisplay(<Formation />),
+      onClick: () => handleDisplay(<Formation />, trainings),
       icon: <DashboardIcon />,
       text: 'Formation'
     },
     {
-      onClick: () => handleDisplay(<ConsultantForm />),
+      onClick: () => handleDisplay(<ConsultantForm />, experiences),
       icon: <CorporateIcon />,
       text: 'Experiences'
     },
     {
-      onClick: () => handleDisplay(<Forum />),
+      onClick: () => handleDisplay(<Forum />, forum),
       icon: <PeopleIcon />,
       text: 'Forum'
     }
   ];
+
 
   return (
     <>
@@ -62,9 +68,10 @@ const sideMenuConsultant = (handleDisplay) => {
 };
 //secondary menu consultant
 const secondMenuConsultant = (handleDisplay, data) => {
+  const profile = "Mon Profil";
   const secondaryItemsRH = [
     {
-      onClick: () => handleDisplay(<ProfilConsultant  consultant={ data } />),
+      onClick: () => handleDisplay(<ProfilConsultant  consultant={ data } />, profile),
       icon: <ProfileIcon />,
       text: 'Profil'
     }
@@ -84,13 +91,11 @@ const secondMenuConsultant = (handleDisplay, data) => {
     </>
   );
 };
-// TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
 export default function DashboardConsultant() {
 //get consultant
-const [consultant, setConsultant] = useState({})
+const [consultant, setConsultant] = useState({});
 const [open, setOpen] = React.useState(true); 
-
+const theme = useTheme();
 useEffect(() => {
   getConsultantById(1).then((res)=>{
     console.log("get consultant +++++ by id", res)
@@ -99,16 +104,18 @@ useEffect(() => {
 }, []);
 
   const [display, setDisplay] = React.useState(<Formation />);
+  const [title, setTitle] = React.useState("Formation");
   
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  const handleDisplay = (display) => {
+  const handleDisplay = (display, title) => {
     setDisplay(display);
+    setTitle(title);
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
@@ -136,7 +143,7 @@ useEffect(() => {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              {title}
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -144,6 +151,7 @@ useEffect(() => {
               </Badge>
             </IconButton>
           </Toolbar>
+          <DividerComponent />
         </AppBar>
         <Drawer variant="permanent" open={open}>
           <Toolbar
