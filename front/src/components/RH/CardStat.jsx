@@ -1,7 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
 import Typography from "@mui/material/Typography";
-import Title from "../Title";
+import { Title } from "../Title";
 import Paper from "@mui/material/Paper";
 
 const CardStat = ({ title, number, arrived }) => {

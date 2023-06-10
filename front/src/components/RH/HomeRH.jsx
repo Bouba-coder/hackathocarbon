@@ -1,11 +1,12 @@
+import React from "react";
 import CardStat from "./CardStat";
 import Grid from "@mui/material/Grid";
 import Description from "./Description";
 
 const HomeRH = () => {
   return (
-    <>
-      <Grid container spacing={2} sx={{ marginTop: 2 }}>
+    <React.Fragment>
+      <Grid container spacing={2} textAlign="-webkit-center" marginTop="5%">
         <Grid item xs={12} sm={12} md={12} lg={6}>
           <Description
             title="Mes informations"
@@ -31,7 +32,7 @@ const HomeRH = () => {
           />
         </Grid>
       </Grid>
-    </>
+    </React.Fragment>
   );
 };
 

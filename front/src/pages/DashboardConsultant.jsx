@@ -103,6 +103,7 @@ useEffect(() => {
   };
   const handleDisplay = (display) => {
     setDisplay(display);
+    setTitle(display);
   };
 
   return (
