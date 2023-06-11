@@ -54,7 +54,7 @@ function NavBar() {
     );
   }, []);
 
-  console.log('user', user);
+  //console.log('user', user);
   // console.log('auth', auth);
 
   return (

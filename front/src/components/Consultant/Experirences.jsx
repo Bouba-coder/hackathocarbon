@@ -13,7 +13,7 @@ function preventDefault(event) {
 
 export default function Experiences({ data }) {
   const experiences = data
-  console.log("Experiences-consultant", experiences)
+  //console.log("Experiences-consultant", experiences)
   return (
     <React.Fragment>
       <Title>Experiences </Title>

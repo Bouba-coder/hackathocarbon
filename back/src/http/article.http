@@ -3,7 +3,7 @@
 
 ###
 # get all article
-GET {{ baseURL }}/article
+GET {{ baseURL }}/user/1
 Content-Type: application/json
 
 

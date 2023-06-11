@@ -19,7 +19,7 @@ import { Dashboard } from "./pages/dashboard/Index";
 export default function App() {
   const user = localStorage.getItem("role");
 
-  console.log('MySuperuser', user);
+  //console.log('MySuperuser', user);
 
   return (
     <ThemeProvider theme={themeNav}>
