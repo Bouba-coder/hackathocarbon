@@ -17,6 +17,7 @@ import CardImage5 from '../assets/image/Jerome.png';
 import CardImage6 from '../assets/image/Sarah.png';
 import PokeCard from '../components/PokeCard';
 import './Home.css';
+import { HomeFirstPage } from '../components/HomeFirstPage';
 /*import imageHome from '../assets/image/imageHome.jpg'*/
 
 
@@ -31,6 +32,7 @@ const theme =  createTheme({
 export default function Home() {
   return (
     <ThemeProvider theme={theme}>
+      <HomeFirstPage />
       <CssBaseline />
       <main>
         {/* Hero unit */}
