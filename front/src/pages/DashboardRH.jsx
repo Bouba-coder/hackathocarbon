@@ -31,11 +31,13 @@ import Copyright from "../components/Copyright";
 import AppBar from "../components/AppBar";
 import Drawer from "../components/Drawer";
 import DividerComponent from "../components/DividerComponent";
+import { authService } from "../services";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const mainListItemsRH = (handleDisplay) => {
   const dashboard = "Tableau de bord";
   const companies = "Nos clients";
-  const consultants = "Nos Consultants";
+  const consultants = "Nos consultants";
   const trainings = "Nos formations";
 
   const itemsRH = [
@@ -87,7 +89,7 @@ const secondaryListItemsRH = (handleDisplay) => {
   return (
     <>
       <ListSubheader component="div" inset>
-        My Information
+        Mes informations
       </ListSubheader>
       {secondaryItemsRH.map((item, index) => (
         <ListItemButton key={index} onClick={item.onClick}>
@@ -171,6 +173,13 @@ const DashboardRH = () => {
             {mainListItemsRH(handleDisplay)}
             <Divider sx={{ my: 1 }} />
             {secondaryListItemsRH(handleDisplay)}
+            <Divider sx={{ my: 1 }} />
+            <ListItemButton key={1} onClick={() => { authService.logout(); window.location.href = "/" }}>
+                <ListItemIcon>
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText primary="Déconnexion" />
+            </ListItemButton>
           </List>
         </Drawer>
         <Box

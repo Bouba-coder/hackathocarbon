@@ -9,14 +9,18 @@ import Login from "./pages/Login";
 import Contact from "./pages/Contact";
 import DashboardRH from "./pages/DashboardRH";
 import DashboardConsultant from "./pages/DashboardConsultant";
-import CreateConsultant from "./pages/consultant/Create";
-import UpdateConsultant from "./pages/consultant/Update";
-import useAuth from "./hooks/useAuth";
 import Forum from "./components/Consultant/Forum";
+import { Entreprise } from "./pages/entreprise/Index";
+import { User } from "./pages/user/Index";
+import { Formation } from "./pages/formation/Index";
+import { Consultant } from "./pages/consultant/Index";
+import NotAutorize from "./pages/NotAutorize";
 
 export default function App() {
-  useAuth();
-  
+  const user = localStorage.getItem("role");
+
+  console.log('MySuperuser', user);
+
   return (
     <ThemeProvider theme={themeNav}>
           <BrowserRouter>
@@ -25,11 +29,14 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="contact" element={<Contact />} />
-        <Route path="dashboard" element={<DashboardRH />} />
-        <Route path="consultant" element={<DashboardConsultant />} />
-        <Route path="consultant/create" element={<CreateConsultant />} />
-        <Route path="consultant/update" element={<UpdateConsultant />} />
+        <Route path="dashboard" element={user === "RH" || user === "ADMIN" ? <DashboardRH /> : <NotAutorize />} />
+        <Route path="consultant" element={user === "CONSULTANT" ? <DashboardConsultant /> : <NotAutorize />} />
+        <Route path="entreprises/*" element={user === "RH" || user === "ADMIN" ? <Entreprise /> : <NotAutorize />} />
+        <Route path="users/*" element={user === "RH" || user === "ADMIN" ? <User /> : <NotAutorize />} />
+        <Route path="formations/*" element={user === "RH" || user === "ADMIN" ? <Formation /> : <NotAutorize />} />
+        <Route path="consultants/*" element={user === "RH" || user === "ADMIN" ? <Consultant /> : <NotAutorize />} />
         <Route path="*" element={<NoPage />} />
+        <Route path="/notauthorize" element={<NotAutorize />} />
       </Routes>
     </BrowserRouter>
     </ThemeProvider>

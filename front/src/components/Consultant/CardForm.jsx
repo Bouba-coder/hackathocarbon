@@ -43,12 +43,6 @@ const CardForm = ({ title, description, duree, niveau, contact, userId, formatio
                 image="https://picsum.photos/200/300"
                 title="green iguana"
             />
-            {/* <CardMedia
-                component="img"
-                height="140"
-                image="https://picsum.photos/200/300"
-                alt="green iguana"
-            /> */}
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                     {title} - Duree : { duree } Jours

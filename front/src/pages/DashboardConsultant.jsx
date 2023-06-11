@@ -25,13 +25,18 @@ import ConsultantForm from "../components/Consultant/AddInformation";
 import Forum from "../components/Consultant/Forum";
 import { ListItemButton, ListItemIcon, ListItemText, ListSubheader } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import CorporateIcon from "@mui/icons-material/CorporateFare";
+import FolderIcon from '@mui/icons-material/Folder';
 import PeopleIcon from "@mui/icons-material/People";
 import ProfileIcon from "@mui/icons-material/AccountCircle";
 import DividerComponent from "../components/DividerComponent";
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import useAuth from "../hooks/useAuth";
 import UpdateConsultant from "./consultant/Update";
+import LogoutIcon from '@mui/icons-material/Logout';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import { Link } from "react-router-dom";
+import { authService } from "../services";
+import { useNavigate } from "react-router-dom";
 
 //main menu consultant
 const sideMenuConsultant = (handleDisplay) => {
@@ -71,25 +76,25 @@ const sideMenuConsultant = (handleDisplay) => {
 };
 //secondary menu consultant
 const secondMenuConsultant = (handleDisplay, data) => {
-  const profile = "Mon Profil";
-  const experiences = "Formations suivi";
+  const profile = "Mon profil";
+  const experiences = "Mon dossier consultant";
   const secondaryItemsRH = [
     {
       onClick: () => handleDisplay(<ProfilConsultant  consultant={ data } />, profile),
       icon: <ProfileIcon />,
-      text: 'Profil'
+      text: 'Mon profil'
     },
     {
       onClick: () => handleDisplay(<ConsultantForm />, experiences),
-      icon: <CorporateIcon />,
-      text: 'Fomations suivi'
+      icon: <FolderIcon />,
+      text: 'Mon dossier'
     },
   ];
 
   return (
     <>
-      <ListSubheader component="div" inset>
-        Mon profil
+      <ListSubheader component="div" sx={{ textAlign: "center" }}>
+        Mon espace personnel
       </ListSubheader>
       {secondaryItemsRH.map((item, index) => (
         <ListItemButton key={index} onClick={item.onClick}>
@@ -104,6 +109,7 @@ const secondMenuConsultant = (handleDisplay, data) => {
 
 export default function DashboardConsultant() {
 //get consultant
+const navigate = useNavigate();
 const [consultant, setConsultant] = useState({});
 const [open, setOpen] = React.useState(true);
 const [loading, setLoading] = useState(false) 
@@ -164,11 +170,11 @@ useEffect(() => {
             >
               {title}
             </Typography>
-            <IconButton color="inherit">
+            {/* <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
           </Toolbar>
           <DividerComponent />
         </AppBar>
@@ -187,9 +193,25 @@ useEffect(() => {
           </Toolbar>
           <Divider />
           <List component="nav">
+            <ListItemButton key={1}>
+                <ListItemIcon>
+                  <HomeRoundedIcon />
+                </ListItemIcon>
+              <Link to={`/`}>
+                <ListItemText primary="Page d'accueil" />
+              </Link>
+            </ListItemButton>
+            <Divider sx={{ my: 1 }} />
             { sideMenuConsultant(handleDisplay) }
             <Divider sx={{ my: 1 }} />
             { secondMenuConsultant(handleDisplay, consultant) }
+            <Divider sx={{ my: 1 }} />
+            <ListItemButton key={1} onClick={() => { authService.logout(); window.location.href = "/" }}>
+                <ListItemIcon>
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText primary="Déconnexion" />
+            </ListItemButton>
           </List>
         </Drawer>
         <Box
