@@ -2,11 +2,12 @@ import * as React from 'react';
 import CardForm from './CardForm';
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { getFormations } from '../../utils/api';
+import { getFormations, getUserById } from '../../utils/api';
 
 export default function Formation() {
 
 const [formations, setFormation] = useState([])
+const [user, setUser] = useState({})
 const [loading, setLoading] = useState(true)
 useEffect(() => {
   getFormations().then((res)=>{
@@ -16,8 +17,13 @@ useEffect(() => {
       setLoading(false)
     }
   })
+
+  getUserById(2).then((res)=>{
+    console.log("get user by id getUserById formation", res)
+    setUser(res)
+  })
 }, []);
-console.log("loading", loading)
+
   return (
     <>
       <Box
@@ -31,7 +37,7 @@ console.log("loading", loading)
           },
         }}
       >
-        {loading ? <h1>loading</h1> : formations.map((formation) => <CardForm title={formation.nom} description={formation.description} duree={formation.duree}  niveau={formation.niveau} contact={`mailto:test@example.com`} />)}
+        {loading ? <h1>loading</h1> : formations.map((formation) => <CardForm title={formation.nom} description={formation.description} duree={formation.duree}  niveau={formation.niveau} contact={`mailto:test@example.com`} formationId={formation.id} userId={user?.data?.id} />)}
       </Box>
 
     </>

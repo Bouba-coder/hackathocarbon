@@ -8,11 +8,11 @@ Content-Type: application/json
 
 ###
 # get consultant
-GET {{ baseURL }}/consultant/1
+GET {{ baseURL }}/consultant/3
 Content-Type: application/json
 
 ###
-# create analytics
+# create consultant
 POST {{ baseURL }}/consultant
 Content-Type: application/json
 

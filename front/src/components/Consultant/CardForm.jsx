@@ -9,11 +9,11 @@ import Typography from '@mui/material/Typography';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import Rating from '@mui/material/Rating';
+import { subscribFormation } from "../../utils/api";
 
 
-const CardForm = ({ title, description, duree, niveau, contact }) => {
+const CardForm = ({ title, description, duree, niveau, contact, userId, formationId }) => {
     const [value, setValue] = useState(1);
-    console.log("value", value)
     useEffect(() => {
         if(niveau == "Expert"){
             setValue(5)
@@ -26,7 +26,13 @@ const CardForm = ({ title, description, duree, niveau, contact }) => {
         }
     }, []);
     
-    
+    const subscribeToFormation = () => {
+        console.log("subscribeToFormation")
+        console.log('userId --- FormationId ', userId + formationId)
+        subscribFormation(userId, formationId).then((res)=>{
+            console.log("subscribeFormation", res)
+        })
+    }
 
   return (
     <React.Fragment>
@@ -45,10 +51,17 @@ const CardForm = ({ title, description, duree, niveau, contact }) => {
                     {description}
                 </Typography>
                 <Typography component="legend">Niveau : {niveau}</Typography>
-                    <Rating name="simple-controlled" value={value} readOnly />                       
+                        <Rating
+                        name="simple-controlled"
+                        value={value}
+                        readOnly />
+
             </CardContent>
                 <CardActions>              
                 <Button size="small" href={contact}>Contacter</Button>
+                <form autoComplete="off" onSubmit={subscribeToFormation}>
+                    <Button variant="outlined" color="secondary" type="submit">Postuler</Button>
+                </form>
                 </CardActions>
             </CardActionArea>
         </Card>

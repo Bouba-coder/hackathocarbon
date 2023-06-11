@@ -33,12 +33,15 @@ import Drawer from "../components/Drawer";
 import DividerComponent from "../components/DividerComponent";
 import { authService } from "../services";
 import LogoutIcon from '@mui/icons-material/Logout';
+import Forum from "../components/Consultant/Forum";
+import ChatIcon from '@mui/icons-material/Chat';
 
 const mainListItemsRH = (handleDisplay) => {
   const dashboard = "Tableau de bord";
   const companies = "Nos clients";
   const consultants = "Nos consultants";
   const trainings = "Nos formations";
+  const forum = "Forum";
 
   const itemsRH = [
     {
@@ -60,6 +63,11 @@ const mainListItemsRH = (handleDisplay) => {
       onClick: () => handleDisplay(<ListTrainings />, trainings),
       icon: <AssignmentIcon />,
       text: trainings,
+    },
+    {
+      onClick: () => handleDisplay(<Forum />, forum),
+      icon: <ChatIcon />,
+      text: forum,
     },
   ];
 
