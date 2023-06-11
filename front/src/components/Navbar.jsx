@@ -15,11 +15,16 @@ import { ThemeProvider } from "@mui/material/styles";
 import { themeNav } from "./Theme";
 import { capitalize } from "../utils/functions";
 import DividerComponent from "./DividerComponent";
+import LogoCarbon from "../assets/logo_blanc.svg";
+import { authService } from "../services";
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
-const pages = ["login", "contact", "about"];
+const pages = ["login"];
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [user, setUser] = React.useState(null);
+  const [auth, setAuth] = React.useState(true);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -29,13 +34,29 @@ function NavBar() {
     setAnchorElNav(null);
   };
 
+  React.useEffect(() => {
+    authService.getCurrentUser().then((data) => {
+      setUser(data);
+      setAuth(true);
+    }
+    ).catch((err) => {
+      setUser(null);
+      setAuth(false);
+    }
+    );
+  }, []);
+
+  console.log('user', user);
+  console.log('auth', auth);
+
   return (
     <AppBar>
       <ThemeProvider theme={themeNav}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-            <Typography
+            {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
+            <img src={LogoCarbon} alt="logo" className="w-28" />
+            {/* <Typography
               variant="h6"
               noWrap
               component="a"
@@ -51,7 +72,7 @@ function NavBar() {
               }}
             >
               LOGO
-            </Typography>
+            </Typography> */}
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
@@ -119,17 +140,38 @@ function NavBar() {
                 display: { xs: "none", md: "flex" },
               }}
             >
-              {pages.map((page) => (
-                <Button
-                  component={Link}
-                  href={`/${page}`}
-                  onClick={handleCloseNavMenu}
-                  key={page}
-                  sx={{ my: 2, color: "white", display: "block", m: 1 }}
-                >
-                  {page}
-                </Button>
-              ))}
+              {
+                user ? (
+                  <div>
+                    <span className="capitalize">
+                      Bienvenue {user.firstName} {user.lastName}
+                    </span>
+                    <IconButton
+                      size="large"
+                      aria-haspopup="true"
+                      color="inherit"
+                      component={Link}
+                      href="/consultant"
+                    >
+                      <AccountCircle />
+                    </IconButton>
+                  </div>
+                ) : (
+                  <div>
+                    {pages.map((page) => (
+                      <Button
+                        component={Link}
+                        href={`/${page}`}
+                        onClick={handleCloseNavMenu}
+                        key={page}
+                        sx={{ my: 2, color: "white", display: "block", m: 1 }}
+                      >
+                        {page}
+                      </Button>
+                    ))}
+                  </div>
+                )
+              }
             </Box>
           </Toolbar>
         </Container>

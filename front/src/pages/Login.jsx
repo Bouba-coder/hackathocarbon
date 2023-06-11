@@ -12,58 +12,24 @@ import { ThemeProvider } from "@mui/material/styles";
 import { themeLogin } from "../components/Theme";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Snackbar from '@mui/material/Snackbar';
-import axios from 'axios';
+import { authService } from "../services";
 
 export default function SignIn() {
   const navigate = useNavigate();
   
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [state, setState] = useState({
-    open: false,
-    vertical: 'top',
-    horizontal: 'center',
-    message: '',
-  });
-  const { vertical, horizontal, open, message } = state;
-
-  const handleLogin = async () => {
-    try {
-      const response = await axios.post('http://localhost:3000/auth/login', {
-        email: username,
-        password: password,
-      });
-
-      localStorage.setItem('token', response.data.access_token);
-      console.log(response);
-
-      setState({ 
-        open: true,
-        vertical: 'top',
-        horizontal: 'right',
-        message: 'Connexion réussie',
-      });
-      navigate('/');
-
-    } catch (error) {
-      console.error(error);
-      setState({
-        open: true,
-        vertical: 'top',
-        horizontal: 'right',
-        message: 'Erreur de connexion',
-      });
-    }
-  };
-
-  const handleClose = () => {
-    setState({ ...state, open: false });
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleLogin();
+    authService.login(username, password).then((response) => {
+      if (response.data.role === "ADMIN" || response.data.role === "RH") {
+        navigate("/dashboard");
+      } else {
+        navigate("/dashboard");
+      }
+      console.log('data', data);
+    });
   };
 
   return (
@@ -125,14 +91,6 @@ export default function SignIn() {
           </Box>
         </Box>
       </Container>
-      <Snackbar
-        anchorOrigin={{ vertical, horizontal }}
-        autoHideDuration={6000}
-        open={open}
-        onClose={handleClose}
-        message={message}
-        key={vertical + horizontal}
-      />
     </ThemeProvider>
   );
 }
