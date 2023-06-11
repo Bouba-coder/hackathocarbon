@@ -12,7 +12,20 @@ const StyledCard = styled(Card)(({ theme }) => ({
   '&.flipped': {
     transform: 'rotateY(180deg)',
   },
+  // borderRadius: "30%",
+  // border: "1px solid #000",
+  // boxShadow: "0 0 10px #000",
+  // display: "flex",
+  // justifyContent: "center",
+  // alignItems: "center",
+  // backgroundColor: "#fff",
+  // "&:hover": {
+  //     transform: "scale(1.1)",
+  //     transition: "all 0.5s ease-in-out",
+  //     cursor: "pointer",
+  // },
 }));
+
 
 const PokeCard = (props) => {
   const { imageSrc, isCardFlipped } = props;
