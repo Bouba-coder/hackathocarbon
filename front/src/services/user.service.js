@@ -22,10 +22,15 @@ function remove(id) {
     return axios.delete(`${baseUrl}/${id}`).then(response => response.data);
 }
 
+function unsubscribe(id, formationId) {
+    return axios.patch(`${baseUrl}/${id}/unsubscribe/formations/${formationId}`).then(response => response.data);
+}
+
 export const userService = {
     getAll,
     getById,
     create,
     update,
-    remove
+    remove,
+    unsubscribe
 };

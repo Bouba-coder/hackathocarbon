@@ -1,20 +1,26 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { ListConsultant } from "./List";
-import { AddEditConsultant } from "./AddEdit"; 
+import DashboardConsultant from "../DashboardConsultant";
+import Formation from "../../components/Consultant/Formation";
+import Forum from "../../components/Consultant/Forum";
+import { User } from "./user/Index";
+import { Consultant } from "./consultant/Index";
+import { Formations } from "./formation/Index";
 
-function Consultant() {
+function DashConsultant() {
 
     return (
-        <div>
+        <DashboardConsultant> 
             <Routes>
-                <Route path="/" element={<ListConsultant/>} />
-                <Route path="add" element={<AddEditConsultant/>} />
-                <Route path="edit/:id" element={<AddEditConsultant/>} />
+                <Route path="/" element={<Formation />} />
+                <Route path="forum" element={<Forum />} />
+                <Route path="user/*" element={<User />} />
+                <Route path="consultant/*" element={<Consultant />} />
+                <Route path="formation/*" element={<Formations />} />
             </Routes>
-        </div>
+        </DashboardConsultant>
     );
 }
 
-export { Consultant };
+export { DashConsultant };
