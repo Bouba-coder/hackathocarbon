@@ -24,9 +24,9 @@ export default function SignIn() {
     event.preventDefault();
     authService.login(username, password).then((response) => {
       if (response.data.role === "ADMIN" || response.data.role === "RH") {
-        navigate("/dashboard");
+        window.location.href = "/dashboard";
       } else {
-        navigate("/dashboard");
+        window.location.href = "/consultant";
       }
       console.log('data', data);
     });

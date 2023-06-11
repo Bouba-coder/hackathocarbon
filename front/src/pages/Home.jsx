@@ -36,7 +36,7 @@ export default function Home() {
         {/* Hero unit */}
         <Box sx={{ bgcolor: 'background.paper', pt: 8, pb: 6 }}>
   <Container maxWidth="sm">
-    <div className="container">
+    <div className="container mt-20">
       <div className="texts">
         <Typography component="h1" variant="h4" align="left" color="text.primary" gutterBottom>
           Entreprise & Freelance étaient faits pour se rencontrer

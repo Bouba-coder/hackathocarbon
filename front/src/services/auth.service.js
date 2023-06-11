@@ -12,6 +12,7 @@ const currentUser = currentUserSubject.asObservable();
 function login(email, password) {
     return axios.post(`${baseUrl}/login`, { email, password }).then(response => {
         localStorage.setItem('token', response.data.access_token);
+        localStorage.setItem('role', response.data.data.role);
         return response.data;
     });
 }
@@ -32,7 +33,7 @@ function getCurrentUserSubject() {
 }
 
 function logout() {
-    localStorage.removeItem('token');
+    localStorage.clear();
     currentUserSubject.next(null);
 }
 

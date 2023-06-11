@@ -188,7 +188,7 @@ useEffect(() => {
             <Divider sx={{ my: 1 }} />
             { secondMenuConsultant(handleDisplay, consultant) }
             <Divider sx={{ my: 1 }} />
-            <ListItemButton key={1} onClick={() => { authService.logout(); navigate("/"); }}>
+            <ListItemButton key={1} onClick={() => { authService.logout(); window.location.href = "/" }}>
                 <ListItemIcon>
                   <LogoutIcon />
                 </ListItemIcon>

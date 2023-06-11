@@ -24,7 +24,9 @@ const pages = ["login"];
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [user, setUser] = React.useState(null);
-  const [auth, setAuth] = React.useState(true);
+  // const [auth, setAuth] = React.useState(true);
+  const [rh, setRh] = React.useState(false);
+  const [consultant, setConsultant] = React.useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -37,7 +39,13 @@ function NavBar() {
   React.useEffect(() => {
     authService.getCurrentUser().then((data) => {
       setUser(data);
-      setAuth(true);
+      // setAuth(true);
+      
+      if (data?.role === "RH" || data?.role === "ADMIN") {
+        setRh(true);
+      } else if (data?.role === "CONSULTANT") {
+        setConsultant(true);
+      }
     }
     ).catch((err) => {
       setUser(null);
@@ -47,7 +55,7 @@ function NavBar() {
   }, []);
 
   console.log('user', user);
-  console.log('auth', auth);
+  // console.log('auth', auth);
 
   return (
     <AppBar>
@@ -146,7 +154,18 @@ function NavBar() {
                     <span className="capitalize">
                       Bienvenue {user.firstName} {user.lastName}
                     </span>
-                    <IconButton
+                    {rh ? (
+                      <IconButton
+                      size="large"
+                      aria-haspopup="true"
+                      color="inherit"
+                      component={Link}
+                      href="/dashboard"
+                    >
+                        <AccountCircle />
+                    </IconButton>
+                    ) : (
+                      <IconButton
                       size="large"
                       aria-haspopup="true"
                       color="inherit"
@@ -155,6 +174,8 @@ function NavBar() {
                     >
                       <AccountCircle />
                     </IconButton>
+                    )
+                    }
                   </div>
                 ) : (
                   <div>

@@ -33,10 +33,9 @@ const CardForm = ({ title, description, duree, niveau, contact }) => {
         <Card sx={{ maxWidth: 345 }}>
             <CardActionArea>
             <CardMedia
-                component="img"
-                height="140"
+                sx={{ height: 140 }}
                 image="https://picsum.photos/200/300"
-                alt="green iguana"
+                title="green iguana"
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
