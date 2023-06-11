@@ -57,6 +57,14 @@ docker-compose exec backend bash -c "npx prisma migrate dev"
 docker-compose exec backend bash -c "npx prisma db seed"
 ```
 
+## Account for authentication 
+#### Consultant
+- Username : micdu@gmail.com
+- Password : password
+
+#### RH
+- Username : ast@gmail.com
+- Password : password
 
 ## Uninstall / Stop
 
