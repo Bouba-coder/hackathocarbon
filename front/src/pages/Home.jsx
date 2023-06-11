@@ -1,37 +1,21 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Footer from '../components/Footer/Footer';
-import SearchBar from '../components/SearchBar/SearchBar';
-import CardImage from '../assets/image/Jessica.jpg';
-import CardImage2 from '../assets/image/Franklin.jpg';
-import CardImage3 from '../assets/image/Han.png';
-import CardImage4 from '../assets/image/Matthieu.png';
-import CardImage5 from '../assets/image/Jerome.png';
-import CardImage6 from '../assets/image/Sarah.png';
-import PokeCard from '../components/PokeCard';
-import './Home.css';
-import NosPartenaire from '../components/NosPartenaires';
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import SearchBar from "../components/SearchBar/SearchBar";
+import CardContainer from "../components/CardContainer";
+import DividerHome from "../components/DividerHome";
+import { blueCarbon, greyCarbon, whiteCarbon } from "../components/Theme";
+import Footer from "../components/Footer/Footer";
+import "./Home.css";
+import NosPartenaire from "../components/NosPartenaires";
 /*import imageHome from '../assets/image/imageHome.jpg'*/
 
-
-const theme =  createTheme({
-  palette: {
-    primary: {
-      main: '#282B2A',
-    }
-  }
-});
-
-export default function Home() {
+const Home = () => {
   return (
-    <ThemeProvider theme={theme}>
+    <main>
       <CssBaseline />
       <main>
         {/* Hero unit */}
@@ -43,65 +27,41 @@ export default function Home() {
           <Container>
               <SearchBar />
           </Container>
-      </Box>
-
-
-
-{/* Espace CARDS Consultants */}
-        <Container sx={{ py: 8 }} maxWidth="md">
-          <Grid container spacing={7}>
-              <PokeCard
-                isCardFlipped={true}
-                imageSrc={CardImage}
-                sx={{ maxWidth: 400 }}
-              />
-              <PokeCard
-                imageSrc={CardImage2}
-                sx={{ maxWidth: 400 }}
-              />
-              <PokeCard
-                isCardFlipped={true}
-                imageSrc={CardImage3}
-                sx={{ maxWidth: 400 }}
-              />
-            {/* Ajoutez d'autres cartes ici pour plus de card les gars */}
-          </Grid>
-        </Container>
-{/* Espace CARDS Consultants 2eme rangée */}
-        <Container sx={{ py: 8 }} maxWidth="md">
-          <Grid container spacing={7}>
-              <PokeCard
-                imageSrc={CardImage4}
-                title="Matthieu"
-                description="Pokemon DevBack End"
-                sx={{ maxWidth: 400 }}
-              />
-              <PokeCard
-                isCardFlipped={true}
-                imageSrc={CardImage5}
-                title="Jerome"
-                description="Pokemon DevOps"
-                sx={{ maxWidth: 400 }}
-              />
-              <PokeCard
-                imageSrc={CardImage6}
-                title="Sarah"
-                description="Pokemon DevFront End"
-                sx={{ maxWidth: 400 }}
-              />
-            {/* Ajoutez d'autres cartes ici pour plus de card les gars */}
-          </Grid>
-        </Container>
+        </Box>
       </main>
 
+
+      <DividerHome
+        colorFirst={whiteCarbon}
+        sizeFirst={"10%"}
+        colorSecond={blueCarbon}
+        sizeSecond={"30%"}
+        colorThird={blueCarbon}
+        sizeThird={"10%"}
+        colorFourth={blueCarbon}
+        sizeFourth={"10%"}
+        colorFifth={greyCarbon}
+        sizeFifth={"30%"}
+      />
+      <CardContainer />
+      <DividerHome
+        colorFirst={greyCarbon}
+        sizeFirst={"30%"}
+        colorSecond={blueCarbon}
+        sizeSecond={"10%"}
+        colorThird={blueCarbon}
+        sizeThird={"30%"}
+        colorFourth={blueCarbon}
+        sizeFourth={"10%"}
+        colorFifth={whiteCarbon}
+        sizeFifth={"10%"}
+      />
       <Container sx={{ py: 8 }} maxWidth="md">
         <NosPartenaire />
-     </Container>
-{/* Espace Footer */}
-    <Container sx={{ py: 8 }} maxWidth="md">
-      <Footer className="footer"/>
-    </Container>
-    </ThemeProvider>
+      </Container>
+      <Footer />
+    </main>
   );
-  
-}
+};
+
+export default Home;
