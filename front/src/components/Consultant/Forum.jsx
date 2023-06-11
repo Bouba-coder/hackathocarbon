@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { addCommentaire, getArticles, getCommentairesByAuthorId } from "../../utils/api";
+import { addCommentaire, getArticles, getCommentaires } from "../../utils/api";
 import * as React from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -24,22 +24,22 @@ const Forum = () => {
   const [titleError, setTitleError] = useState(false)
   const [contentError, setContentError] = useState(false)
   const [authorId, setAuthorId] = useState(1);
-  const [isLoad, setIsload] = useState(0)
+  const [isLoad, setIsload] = useState()
 
   useEffect(() => {
     getArticles().then((res) => {
       //console.log("ressss", res)
       setArticle(res);
-      res.map(result => {
-        //console.log("setCommentaire", result.authorId)
-        getCommentairesByAuthorId(result.authorId).then((res) => {
-          setCommentaire(res);
-        });
-      })
+    });
+    getCommentaires().then((res) => {
+      //console.log("ressss", res)
+      setCommentaire(res);
     });
 
-  }, [isLoad]);
+  }, [handleSubmit, isLoad]);
 
+
+  //console.log('datatatttatat', commentaire);
     //add article
     function handleSubmit(event) {
       event.preventDefault();
@@ -133,8 +133,6 @@ const Forum = () => {
               <Divider variant="inset" component="li" />
               {
                 commentaire.map((comment) => {
-                  //console.log("comment?.articleId", comment?.articleId)
-                  //console.log("article?.id", article?.authorId)
                   if(comment?.articleId === article?.id){
                   return (
                     <ListItem alignItems="flex-start">

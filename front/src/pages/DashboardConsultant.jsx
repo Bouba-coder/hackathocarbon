@@ -31,12 +31,13 @@ import ProfileIcon from "@mui/icons-material/AccountCircle";
 import DividerComponent from "../components/DividerComponent";
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import useAuth from "../hooks/useAuth";
-import UpdateConsultant from "./consultant/Update";
+import MyProfile from "../components/Consultant/forms/MyProfile";
 import LogoutIcon from '@mui/icons-material/Logout';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { Link } from "react-router-dom";
 import { authService } from "../services";
 import { useNavigate } from "react-router-dom";
+import ChatIcon from '@mui/icons-material/Chat';
 
 //main menu consultant
 const sideMenuConsultant = (handleDisplay) => {
@@ -50,14 +51,14 @@ const sideMenuConsultant = (handleDisplay) => {
       icon: <DashboardIcon />,
       text: 'Formation'
     },
-    {
-      onClick: () => handleDisplay(<UpdateConsultant />, cv),
-      icon: <AccessibilityNewIcon />,
-      text: "Cv"
-    },
+    // {
+    //   onClick: () => handleDisplay(<MyProfile />, cv),
+    //   icon: <AccessibilityNewIcon />,
+    //   text: "Cv"
+    // },
     {
       onClick: () => handleDisplay(<Forum />, forum),
-      icon: <PeopleIcon />,
+      icon: <ChatIcon />,
       text: 'Forum'
     }
   ];

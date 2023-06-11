@@ -57,6 +57,12 @@ export const getCommentairesByAuthorId = async (id) => {
     return response.data
 }
 
+//get all commentaire 
+export const getCommentaires = async () => {
+    const response = await axios.get(`http://localhost:3000/commentaire`, headers)
+    return response.data
+}
+
 //add commentaire
 export const addCommentaire = async (commentaire) => {
     const response = await axios.post(`http://localhost:3000/commentaire`, commentaire, headers)
