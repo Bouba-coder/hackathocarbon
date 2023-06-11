@@ -122,7 +122,7 @@ useEffect(() => {
     setConsultant(res)
   })
 
-  console.log("get consultant +++++ by id", consultant)
+  //console.log("get consultant +++++ by id", consultant)
   if (Object.keys(consultant).length === 0) {
     setLoading(true);
   }

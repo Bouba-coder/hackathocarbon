@@ -25,12 +25,11 @@ const CardForm = ({ title, description, duree, niveau, contact, userId, formatio
             setValue(2)
         }
     }, []);
-    
+
     const subscribeToFormation = () => {
-        console.log("subscribeToFormation")
-        console.log('userId --- FormationId ', userId + formationId)
-        subscribFormation(userId, formationId).then((res)=>{
-            console.log("subscribeFormation", res)
+        //console.log('userId --- FormationId ', userId + formationId)
+        subscribFormation(formationId, userId).then((res)=>{
+            //console.log("subscribeFormation", res)
         })
     }
 
@@ -59,7 +58,7 @@ const CardForm = ({ title, description, duree, niveau, contact, userId, formatio
             </CardContent>
                 <CardActions>              
                 <Button size="small" href={contact}>Contacter</Button>
-                <form autoComplete="off" onSubmit={subscribeToFormation}>
+                <form autoComplete="off" onSubmit={subscribeToFormation()}>
                     <Button variant="outlined" color="secondary" type="submit">Postuler</Button>
                 </form>
                 </CardActions>
