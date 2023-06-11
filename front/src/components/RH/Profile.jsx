@@ -24,8 +24,7 @@ const ProfilePage = () => {
       <div>
         <Card>
           <CardContent>
-            <Typography variant="h5">Profile</Typography>
-  
+            <Typography variant="h5">Modifier les informations me concernant</Typography>
             <form onSubmit={handleSubmit}>
               <TextField
                 label="Email"
