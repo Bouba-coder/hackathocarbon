@@ -38,12 +38,15 @@ import { ListConsultant } from "./consultant/List";
 import { ListFormation } from "./formation/List";
 import { ViewUser } from "./user/View";
 import { Link } from "react-router-dom";
+import Forum from "../components/Consultant/Forum";
+import ChatIcon from '@mui/icons-material/Chat';
 
 const mainListItemsRH = (handleDisplay) => {
   const dashboard = "Tableau de bord";
   const companies = "Nos clients";
   const consultants = "Nos consultants";
   const trainings = "Nos formations";
+  const forum = "Forum";
 
   const itemsRH = [
     {
@@ -69,6 +72,12 @@ const mainListItemsRH = (handleDisplay) => {
       navigate: "formation",
       icon: <AssignmentIcon />,
       text: trainings,
+    },
+    {
+      onClick: () => handleDisplay(forum),
+      navigate: "forum",
+      icon: <ChatIcon />,
+      text: forum,
     },
   ];
 

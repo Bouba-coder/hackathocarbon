@@ -7,6 +7,7 @@ import { Entreprise } from "./entreprise/Index";
 import { Consultant } from "./consultant/Index";
 import { Formation } from "./formation/Index";
 import { User } from "./user/Index";
+import Forum from "../../components/Consultant/Forum";
 
 function Dashboard() {
 
@@ -18,6 +19,7 @@ function Dashboard() {
                 <Route path="consultant/*" element={<Consultant />} />
                 <Route path="formation/*" element={<Formation />} />
                 <Route path="user/*" element={<User />} />
+                <Route path="forum" element={<Forum />} />
             </Routes>
         </DashboardRH>
     );

@@ -16,3 +16,8 @@ docker-compose up -d
 docker-compose exec backend bash -c "npx prisma migrate dev"
 docker-compose exec backend bash -c "npx prisma db seed"
 ```
+
+## remove
+```bash
+docker compose down --remove-orphans --volumes
+```

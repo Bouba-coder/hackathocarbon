@@ -6,6 +6,17 @@
 GET {{ baseURL }}/article
 Content-Type: application/json
 
+
+###
+# login
+POST {{ baseURL }}/auth/login
+Content-Type: application/json
+
+{
+  "email": "oreg@gmail.com",
+  "password": "passwordUsers"
+}
+
 ###
 # get article
 GET {{ baseURL }}/article/1

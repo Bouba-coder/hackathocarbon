@@ -29,15 +29,20 @@ import FolderIcon from '@mui/icons-material/Folder';
 import PeopleIcon from "@mui/icons-material/People";
 import ProfileIcon from "@mui/icons-material/AccountCircle";
 import DividerComponent from "../components/DividerComponent";
+import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
+import useAuth from "../hooks/useAuth";
+import MyProfile from "../components/Consultant/forms/MyProfile";
 import LogoutIcon from '@mui/icons-material/Logout';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { Link } from "react-router-dom";
 import { authService } from "../services";
 import { useNavigate } from "react-router-dom";
+import ChatIcon from '@mui/icons-material/Chat';
 
 //main menu consultant
 const sideMenuConsultant = (handleDisplay) => {
   const trainings = "Formations";
+  const cv = "cv";
   const forum = "Forum";
 
   const itemsConsultant = [
@@ -46,9 +51,14 @@ const sideMenuConsultant = (handleDisplay) => {
       icon: <DashboardIcon />,
       text: 'Formation'
     },
+    // {
+    //   onClick: () => handleDisplay(<MyProfile />, cv),
+    //   icon: <AccessibilityNewIcon />,
+    //   text: "Cv"
+    // },
     {
       onClick: () => handleDisplay(<Forum />, forum),
-      icon: <PeopleIcon />,
+      icon: <ChatIcon />,
       text: 'Forum'
     }
   ];
@@ -96,18 +106,27 @@ const secondMenuConsultant = (handleDisplay, data) => {
     </>
   );
 };
+
+
 export default function DashboardConsultant() {
 //get consultant
 const navigate = useNavigate();
 const [consultant, setConsultant] = useState({});
-const [open, setOpen] = React.useState(true); 
+const [open, setOpen] = React.useState(true);
+const [loading, setLoading] = useState(false) 
 const theme = useTheme();
+
 useEffect(() => {
   const userId = localStorage.getItem("currentUser")
   getConsultantById(userId).then((res)=>{
-    console.log("get consultant +++++ by id", res)
     setConsultant(res)
   })
+
+  console.log("get consultant +++++ by id", consultant)
+  if (Object.keys(consultant).length === 0) {
+    setLoading(true);
+  }
+
 }, []);
 
   const [display, setDisplay] = React.useState(<Formation />);
