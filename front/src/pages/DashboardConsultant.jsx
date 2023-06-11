@@ -38,6 +38,7 @@ import { Link } from "react-router-dom";
 import { authService } from "../services";
 import { useNavigate } from "react-router-dom";
 import ChatIcon from '@mui/icons-material/Chat';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 
 //main menu consultant
 const sideMenuConsultant = (handleDisplay) => {
@@ -47,17 +48,14 @@ const sideMenuConsultant = (handleDisplay) => {
 
   const itemsConsultant = [
     {
-      onClick: () => handleDisplay(<Formation />, trainings),
+      onClick: () => handleDisplay(trainings),
+      navigate: "",
       icon: <DashboardIcon />,
       text: 'Formation'
     },
-    // {
-    //   onClick: () => handleDisplay(<MyProfile />, cv),
-    //   icon: <AccessibilityNewIcon />,
-    //   text: "Cv"
-    // },
     {
-      onClick: () => handleDisplay(<Forum />, forum),
+      onClick: () => handleDisplay(forum),
+      navigate: "forum",
       icon: <ChatIcon />,
       text: 'Forum'
     }
@@ -67,10 +65,12 @@ const sideMenuConsultant = (handleDisplay) => {
   return (
     <>
       {itemsConsultant.map((item, index) => (
-        <ListItemButton key={index} onClick={item.onClick}>
-          <ListItemIcon>{item.icon}</ListItemIcon>
-          <ListItemText primary={item.text} />
-        </ListItemButton>
+        <Link to={item.navigate} key={index}>
+          <ListItemButton onClick={item.onClick}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItemButton>
+        </Link>
       ))}
     </>
   );
@@ -79,16 +79,26 @@ const sideMenuConsultant = (handleDisplay) => {
 const secondMenuConsultant = (handleDisplay, data) => {
   const profile = "Mon profil";
   const experiences = "Mon dossier consultant";
+  const formations = "Mes formations";
+
   const secondaryItemsRH = [
     {
-      onClick: () => handleDisplay(<ProfilConsultant  consultant={ data } />, profile),
+      onClick: () => handleDisplay(profile),
+      navigate: "user",
       icon: <ProfileIcon />,
       text: 'Mon profil'
     },
     {
-      onClick: () => handleDisplay(<ConsultantForm />, experiences),
+      onClick: () => handleDisplay(experiences),
+      navigate: "consultant",
       icon: <FolderIcon />,
       text: 'Mon dossier'
+    },
+    {
+      onClick: () => handleDisplay(formations),
+      navigate: "formation",
+      icon: <AssignmentIcon />,
+      text: 'Mes Formations'
     },
   ];
 
@@ -98,17 +108,19 @@ const secondMenuConsultant = (handleDisplay, data) => {
         Mon espace personnel
       </ListSubheader>
       {secondaryItemsRH.map((item, index) => (
-        <ListItemButton key={index} onClick={item.onClick}>
-          <ListItemIcon>{item.icon}</ListItemIcon>
-          <ListItemText primary={item.text} />
-        </ListItemButton>
+        <Link to={item.navigate} key={index}>
+          <ListItemButton key={index} onClick={item.onClick}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItemButton>
+        </Link>
       ))}
     </>
   );
 };
 
 
-export default function DashboardConsultant() {
+export default function DashboardConsultant({ children }) {
 //get consultant
 const navigate = useNavigate();
 const [consultant, setConsultant] = useState({});
@@ -122,7 +134,7 @@ useEffect(() => {
     setConsultant(res)
   })
 
-  console.log("get consultant +++++ by id", consultant)
+  //console.log("get consultant +++++ by id", consultant)
   if (Object.keys(consultant).length === 0) {
     setLoading(true);
   }
@@ -135,8 +147,8 @@ useEffect(() => {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  const handleDisplay = (display, title) => {
-    setDisplay(display);
+  const handleDisplay = (title) => {
+    // setDisplay(display);
     setTitle(title);
   };
 
@@ -229,7 +241,8 @@ useEffect(() => {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            {display}
+            {/* {display} */}
+            {children}
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>

@@ -1,8 +1,8 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useForm, useFieldArray } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { consultantService } from "../../services";
-import { entrepriseService } from "../../services";
+import { consultantService } from '../../../services';
+import { entrepriseService } from '../../../services';
 
 function AddEditConsultant() {
     const { id } = useParams();
@@ -43,13 +43,13 @@ function AddEditConsultant() {
 
     function createConsultant(data) {
         return consultantService.create(data).then(() => {
-            navigate("/consultants");
+            navigate("..");
         }).catch(console.error);
     }
 
     function updateConsultant(id, data) {
         return consultantService.update(id, data).then(() => {
-            navigate("/consultants");
+            navigate("..");
         }).catch(console.error);
     }
 
@@ -300,7 +300,7 @@ function AddEditConsultant() {
                     {formState.isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
                     Enregistrer
                 </button>
-                <Link to="/consultants" className="font-bold py-2 px-4 mr-4 rounded-full focus:outline-none focus:shadow-outline">Annuler</Link>
+                <Link to=".." className="font-bold py-2 px-4 mr-4 rounded-full focus:outline-none focus:shadow-outline">Annuler</Link>
             </div>
         </form>
     );

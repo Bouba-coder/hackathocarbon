@@ -9,87 +9,114 @@ import CardContainer from "../components/CardContainer";
 import DividerHome from "../components/DividerHome";
 import { blueCarbon, greyCarbon, whiteCarbon } from "../components/Theme";
 import Footer from "../components/Footer/Footer";
-
+import "./Home.css";
+import NosPartenaire from "../components/NosPartenaires";
+/*import imageHome from '../assets/image/imageHome.jpg'*/
 
 const Home = () => {
   return (
-      <main>
-        <CssBaseline />
-        <Box sx={{ bgcolor: "background.paper", pt: 8, pb: 6 }}>
-          <Container maxWidth="sm">
-            <div className="container mt-20">
-              <div className="texts">
+    <main>
+      <CssBaseline />
+      <Box sx={{ bgcolor: "background.paper", pt: 8, pb: 6 }}>
+        <Container maxWidth="sm">
+          <div className="container mt-20">
+            <div className="texts">
+              <Typography
+                component="h1"
+                variant="h4"
+                align="left"
+                color="text.primary"
+                gutterBottom
+              >
+                Entreprise & Freelance étaient faits pour se rencontrer
+              </Typography>
+              <Typography variant="h5" align="left" color="#00BB7E" paragraph>
+                Trouvez le talent parfait pour propulser vos projets
+              </Typography>
+              <Stack
+                direction="row"
+                spacing={2}
+                justifyContent="flex-start"
+                alignItems="center"
+              >
                 <Typography
-                  component="h1"
-                  variant="h4"
+                  variant="h6"
                   align="left"
-                  color="text.primary"
-                  gutterBottom
+                  color="text.secondary"
+                  paragraph
                 >
-                  Entreprise & Freelance étaient faits pour se rencontrer
+                  Excellent
                 </Typography>
-                <Typography variant="h5" align="left" color="#00BB7E" paragraph>
-                  Trouvez le talent parfait pour propulser vos projets
+                <Typography align="left" color="text.secondary" paragraph>
+                  4.3 sur 5
                 </Typography>
-                <Stack
-                  direction="row"
-                  spacing={2}
-                  justifyContent="flex-start"
-                  alignItems="center"
+                <Typography
+                  variant="h6"
+                  align="left"
+                  color="text.secondary"
+                  paragraph
                 >
-                  <Typography
-                    variant="h6"
-                    align="left"
-                    color="text.secondary"
-                    paragraph
-                  >
-                    Excellent
-                  </Typography>
-                  <Typography align="left" color="text.secondary" paragraph>
-                    4.3 sur 5
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    align="left"
-                    color="text.secondary"
-                    paragraph
-                  >
-                    Trustpilot
-                  </Typography>
-                </Stack>
-                <Stack
-                  direction="row"
-                  spacing={2}
-                  alignItems="center"
-                  justifyContent="flex-end"
+                  Trustpilot
+                </Typography>
+              </Stack>
+              <Stack
+                direction="row"
+                spacing={2}
+                alignItems="center"
+                justifyContent="flex-end"
+              >
+                <SearchBar placeholder='Essayez "Java", "Consultant Marketing"...' />
+                <SearchBar placeholder="Lieu de la mission (ex: Paris, Lyon...)" />
+                <Button variant="contained">Trouvez un freelance</Button>
+                <Typography
+                  variant="h6"
+                  align="center"
+                  color="text.secondary"
+                  paragraph
                 >
-                  <SearchBar placeholder='Essayez "Java", "Consultant Marketing"...' />
-                  <SearchBar placeholder="Lieu de la mission (ex: Paris, Lyon...)" />
-                  <Button variant="contained">Trouvez un freelance</Button>
-                  <Typography
-                    variant="h6"
-                    align="center"
-                    color="text.secondary"
-                    paragraph
-                  >
-                    ou
-                  </Typography>
-                  <Button variant="outlined">Être Contacté</Button>
-                </Stack>
-              </div>
-              <img
-              /* src={imageHome} 
+                  ou
+                </Typography>
+                <Button variant="outlined">Être Contacté</Button>
+              </Stack>
+            </div>
+            <img
+            /* src={imageHome} 
         alt="Le signe que vous recherchiez"
         className="image"*/
-              />
-            </div>
-          </Container>
-        </Box>
-        <DividerHome colorFirst={whiteCarbon} sizeFirst={"10%"} colorSecond={blueCarbon} sizeSecond={"50%"} colorThird={blueCarbon} sizeThird={"10%"} colorFourth={blueCarbon} sizeFourth={"10%"} colorFifth={greyCarbon} sizeFifth={"10%"} />
-        <CardContainer />
-        <DividerHome colorFirst={greyCarbon} sizeFirst={"10%"} colorSecond={blueCarbon} sizeSecond={"10%"} colorThird={blueCarbon} sizeThird={"50%"} colorFourth={blueCarbon} sizeFourth={"10%"} colorFifth={whiteCarbon} sizeFifth={"10%"} />
-        <Footer />
-      </main>
+            />
+          </div>
+        </Container>
+      </Box>
+      <DividerHome
+        colorFirst={whiteCarbon}
+        sizeFirst={"10%"}
+        colorSecond={blueCarbon}
+        sizeSecond={"50%"}
+        colorThird={blueCarbon}
+        sizeThird={"10%"}
+        colorFourth={blueCarbon}
+        sizeFourth={"10%"}
+        colorFifth={greyCarbon}
+        sizeFifth={"10%"}
+      />
+      <CardContainer />
+      <DividerHome
+        colorFirst={greyCarbon}
+        sizeFirst={"10%"}
+        colorSecond={blueCarbon}
+        sizeSecond={"10%"}
+        colorThird={blueCarbon}
+        sizeThird={"50%"}
+        colorFourth={blueCarbon}
+        sizeFourth={"10%"}
+        colorFifth={whiteCarbon}
+        sizeFifth={"10%"}
+      />
+      <Container sx={{ py: 8 }} maxWidth="md">
+        <NosPartenaire />
+      </Container>
+      <Footer />
+    </main>
   );
 };
 

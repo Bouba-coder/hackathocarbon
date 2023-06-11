@@ -25,46 +25,45 @@ const CardForm = ({ title, description, duree, niveau, contact, userId, formatio
             setValue(2)
         }
     }, []);
-    
+
     const subscribeToFormation = () => {
-        console.log("subscribeToFormation")
-        console.log('userId --- FormationId ', userId + formationId)
-        subscribFormation(userId, formationId).then((res)=>{
-            console.log("subscribeFormation", res)
+        //console.log('userId --- FormationId ', userId + formationId)
+        subscribFormation(formationId, userId).then((res)=>{
+            //console.log("subscribeFormation", res)
         })
     }
 
   return (
     <React.Fragment>
-        <Card sx={{ maxWidth: 345 }}>
-            <CardActionArea>
-            <CardMedia
-                sx={{ height: 140 }}
-                image="https://picsum.photos/200/300"
-                title="green iguana"
-            />
-            <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                    {title} - Duree : { duree } Jours
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {description}
-                </Typography>
-                <Typography component="legend">Niveau : {niveau}</Typography>
-                        <Rating
-                        name="simple-controlled"
-                        value={value}
-                        readOnly />
+        <form autoComplete="off" onSubmit={subscribeToFormation()}>
+            <Card sx={{ maxWidth: 345 }}>
+                <CardActionArea>
+                <CardMedia
+                    sx={{ height: 140 }}
+                    image="https://picsum.photos/200/300"
+                    title="green iguana"
+                />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        {title} - Duree : { duree } Jours
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        {description}
+                    </Typography>
+                    <Typography component="legend">Niveau : {niveau}</Typography>
+                            <Rating
+                            name="simple-controlled"
+                            value={value}
+                            readOnly />
 
-            </CardContent>
-                <CardActions>              
-                <Button size="small" href={contact}>Contacter</Button>
-                <form autoComplete="off" onSubmit={subscribeToFormation}>
-                    <Button variant="outlined" color="secondary" type="submit">Postuler</Button>
-                </form>
-                </CardActions>
-            </CardActionArea>
-        </Card>
+                </CardContent>
+                    <CardActions>              
+                    <Button size="small" href={contact}>Contacter</Button>
+                        <Button variant="outlined" color="secondary" type="submit">Postuler</Button>
+                    </CardActions>
+                </CardActionArea>
+            </Card>
+        </form>
     </React.Fragment>
   );
 };

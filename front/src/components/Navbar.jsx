@@ -54,7 +54,7 @@ function NavBar() {
     );
   }, []);
 
-  console.log('user', user);
+  //console.log('user', user);
   // console.log('auth', auth);
 
   return (
@@ -63,7 +63,9 @@ function NavBar() {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
-            <img src={LogoCarbon} alt="logo" className="w-28" />
+            <Link href="/" underline="none">
+              <img src={LogoCarbon} alt="logo" className="w-28" />
+            </Link>
             {/* <Typography
               variant="h6"
               noWrap
@@ -187,7 +189,7 @@ function NavBar() {
                         key={page}
                         sx={{ my: 2, color: "white", display: "block", m: 1 }}
                       >
-                        {page}
+                        Se connecter
                       </Button>
                     ))}
                   </div>
