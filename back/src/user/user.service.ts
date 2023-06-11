@@ -24,7 +24,11 @@ export class UserService {
   }
 
   async findAll() {
-    const users = await this.prisma.user.findMany();
+    const users = await this.prisma.user.findMany({
+      include: {
+        formation: true,
+      }
+    });
 
     return users;
   }
@@ -34,7 +38,11 @@ export class UserService {
       where: {
         id,
       },
-    });
+      include: {
+        formation: true,
+      }
+    }
+    );
 
     if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND);
 

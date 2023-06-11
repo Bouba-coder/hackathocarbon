@@ -34,8 +34,8 @@ export const subscribFormation = async (formationsId, userId) => {
         "formationsId": formationsId,
         "userId": userId
     }
-    console.log("subscribFormation", formation)
-    const response = await axios.post(`http://localhost:3000/user/:${userId}/subscribe/formations/:${formationsId}`, formation)
+    //console.log("subscribFormation----------", formation)
+    const response = await axios.patch(`http://localhost:3000/user/${userId}/subscribe/formations/${formationsId}`, formation)
     return response.data
 }
 
