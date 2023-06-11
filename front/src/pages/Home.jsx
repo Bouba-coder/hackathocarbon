@@ -91,22 +91,22 @@ const Home = () => {
         colorFirst={whiteCarbon}
         sizeFirst={"10%"}
         colorSecond={blueCarbon}
-        sizeSecond={"50%"}
+        sizeSecond={"30%"}
         colorThird={blueCarbon}
         sizeThird={"10%"}
         colorFourth={blueCarbon}
         sizeFourth={"10%"}
         colorFifth={greyCarbon}
-        sizeFifth={"10%"}
+        sizeFifth={"30%"}
       />
       <CardContainer />
       <DividerHome
         colorFirst={greyCarbon}
-        sizeFirst={"10%"}
+        sizeFirst={"30%"}
         colorSecond={blueCarbon}
         sizeSecond={"10%"}
         colorThird={blueCarbon}
-        sizeThird={"50%"}
+        sizeThird={"30%"}
         colorFourth={blueCarbon}
         sizeFourth={"10%"}
         colorFifth={whiteCarbon}

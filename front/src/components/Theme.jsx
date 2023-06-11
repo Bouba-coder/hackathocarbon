@@ -64,7 +64,6 @@ export const themeCardContainer = createTheme({
   palette: {
     background: {
       default: greyCarbon,
-      paper: greyCarbon,
     },
     text: {
       primary: whiteCarbon,

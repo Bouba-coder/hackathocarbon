@@ -5,6 +5,7 @@ import CardImage3 from "../assets/image/Sarah.png";
 import { Box } from "@mui/system";
 import { ThemeProvider } from "@mui/material/styles";
 import { themeCardContainer } from "./Theme";
+import TitleHome from "./TitleHome";
 
 const CardContainer = () => {
   const pokemons = [
@@ -35,20 +36,35 @@ const CardContainer = () => {
     <ThemeProvider theme={themeCardContainer}>
       <Box
         paddingTop="100px"
-        paddingBottom="100px"
         display="flex"
-        justifyContent="space-around"
-        flexWrap="wrap"
+        flexDirection="column"
         backgroundColor={themeCardContainer.palette.background.default}
       >
-        {pokemons.map((pokemon) => (
-          <PokeCard
-            key={pokemon.id}
-            imageSrc={pokemon.imageSrc}
-            review={pokemon.review}
-            isCardFlipped={pokemon.isCardFlipped}
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <TitleHome
+            title="Nos consultants témoignent"
+            variant="h4"
+            align="center"
+            color={themeCardContainer.palette.text.primary}
           />
-        ))}
+        </Box>
+        <Box
+          paddingTop="100px"
+          paddingBottom="100px"
+          display="flex"
+          justifyContent="space-around"
+          flexWrap="wrap"
+          backgroundColor={themeCardContainer.palette.background.default}
+        >
+          {pokemons.map((pokemon) => (
+            <PokeCard
+              key={pokemon.id}
+              imageSrc={pokemon.imageSrc}
+              review={pokemon.review}
+              isCardFlipped={pokemon.isCardFlipped}
+            />
+          ))}
+        </Box>
       </Box>
     </ThemeProvider>
   );
