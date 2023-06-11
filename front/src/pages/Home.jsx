@@ -18,6 +18,7 @@ import CardImage6 from '../assets/image/Sarah.png';
 import PokeCard from '../components/PokeCard';
 import './Home.css';
 import { HomeFirstPage } from '../components/HomeFirstPage';
+import { HomeOpinion } from '../components/HomeOpinion';
 /*import imageHome from '../assets/image/imageHome.jpg'*/
 
 
@@ -33,6 +34,7 @@ export default function Home() {
   return (
     <ThemeProvider theme={theme}>
       <HomeFirstPage />
+      <HomeOpinion />
       <CssBaseline />
       <main>
         {/* Hero unit */}
