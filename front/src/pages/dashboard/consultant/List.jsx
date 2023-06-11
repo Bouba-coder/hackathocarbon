@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { consultantService } from "../../services";
+import { consultantService } from "../../../services"; 
 
 function ListConsultant() {
     const [consultants, setConsultants] = useState(null);

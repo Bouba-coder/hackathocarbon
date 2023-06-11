@@ -7,7 +7,6 @@ import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
 import Login from "./pages/Login";
 import Contact from "./pages/Contact";
-import DashboardRH from "./pages/DashboardRH";
 import DashboardConsultant from "./pages/DashboardConsultant";
 import Forum from "./components/Consultant/Forum";
 import { Entreprise } from "./pages/entreprise/Index";
@@ -15,6 +14,7 @@ import { User } from "./pages/user/Index";
 import { Formation } from "./pages/formation/Index";
 import { Consultant } from "./pages/consultant/Index";
 import NotAutorize from "./pages/NotAutorize";
+import { Dashboard } from "./pages/dashboard/Index";
 
 export default function App() {
   const user = localStorage.getItem("role");
@@ -29,7 +29,7 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="contact" element={<Contact />} />
-        <Route path="dashboard" element={user === "RH" || user === "ADMIN" ? <DashboardRH /> : <NotAutorize />} />
+        <Route path="dashboard/*" element={user === "RH" || user === "ADMIN" ? <Dashboard /> : <NotAutorize />} />
         <Route path="consultant" element={user === "CONSULTANT" ? <DashboardConsultant /> : <NotAutorize />} />
         <Route path="entreprises/*" element={user === "RH" || user === "ADMIN" ? <Entreprise /> : <NotAutorize />} />
         <Route path="users/*" element={user === "RH" || user === "ADMIN" ? <User /> : <NotAutorize />} />

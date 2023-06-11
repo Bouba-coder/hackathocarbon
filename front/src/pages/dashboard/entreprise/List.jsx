@@ -1,66 +1,56 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { consultantService } from "../../services";
+import { entrepriseService } from "../../../services";
 
-function ListConsultant() {
-    const [consultants, setConsultants] = useState(null);
+function ListEntreprise() {
+    const [entreprises, setEntreprises] = useState(null);
 
     useEffect(() => {
-        consultantService.getAll().then((x) => setConsultants(x));
+        entrepriseService.getAll().then((x) => setEntreprises(x));
     }, []);
 
-    function deleteConsultant(id) {
-        setConsultants(
-            consultants.map((x) => {
+    function deleteEntreprise(id) {
+        setEntreprises(
+            entreprises.map((x) => {
                 if (x.id === id) {
                     x.isDeleting = true;
                 }
                 return x;
             })
         );
-        consultantService.remove(id).then(() => {
-            setConsultants((consultants) =>
-                consultants.filter((x) => x.id !== id)
+        entrepriseService.remove(id).then(() => {
+            setEntreprises((entreprises) =>
+                entreprises.filter((x) => x.id !== id)
             );
         });
     }
 
-    console.log('consultants', consultants)
-
     return (
         <div className="mt-20 px-6 py-4">
             <h1 className="text-center text-3xl leading-9 font-extrabold text-gray-900">
-                Liste des consultants
+                Liste des entreprises
             </h1>
             <Link to="add" className="bg-[#00BB7E] text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
-                Ajouter un consultant
+                Ajouter une entreprise
             </Link>
             <table className="w-full text-sm text-left my-6">
                 <thead>
                     <tr>
                         <th scope="col" className="px-6 py-3">Nom</th>
-                        <th scope="col" className="px-6 py-3">Prénom</th>
-                        <th scope="col" className="px-6 py-3">Métier</th>
-                        <th scope="col" className="px-6 py-3">Secteur</th>
-                        <th scope="col" className="px-6 py-3">Disponibilité</th>
-                        <th scope="col" className="px-6 py-3">Entreprise</th>
+                        <th scope="col" className="px-6 py-3">Contact</th>
                         <th scope="col" className="px-6 py-3"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {consultants && consultants.map((consultant) => (
-                        <tr key={consultant.id}>
-                            <td className="px-6 py-4 uppercase">{consultant.user.lastName}</td>
-                            <td className="px-6 py-4 capitalize">{consultant.user.firstName}</td>
-                            <td className="px-6 py-4">{consultant.metier}</td>
-                            <td className="px-6 py-4">{consultant.secteur}</td>
-                            <td className="px-6 py-4">{consultant.disponibilite}</td>
-                            <td className="px-6 py-4">{consultant.entreprise.nom}</td>
+                    {entreprises && entreprises.map((entreprise) => (
+                        <tr key={entreprise.id}>
+                            <td className="px-6 py-4 uppercase">{entreprise.nom}</td>
+                            <td className="px-6 py-4">{entreprise.contact}</td>
                             <td className="px-6 py-4 text-right space-x-2">
-                                <Link to={`edit/${consultant.id}`} className="font-medium text-blue-600">Modifier</Link>
-                                <button onClick={() => deleteConsultant(consultant.id)} className="font-medium text-red-600" disabled={consultant.isDeleting}>
-                                    {consultant.isDeleting ? (
+                                <Link to={`edit/${entreprise.id}`} className="font-medium text-blue-600">Modifier</Link>
+                                <button onClick={() => deleteEntreprise(entreprise.id)} className="font-medium text-red-600" disabled={entreprise.isDeleting}>
+                                    {entreprise.isDeleting ? (
                                         <span>Loading...</span>
                                     ) : (
                                         <span>Supprimer</span>
@@ -69,7 +59,7 @@ function ListConsultant() {
                             </td>
                         </tr>
                     ))}
-                    {!consultants && (
+                    {!entreprises && (
                         <tr>
                             <td colSpan="4" className="text-center">
                                 <div className="flex align-center">
@@ -81,10 +71,10 @@ function ListConsultant() {
                             </td>
                         </tr>
                     )}
-                    {consultants && !consultants.length && (
+                    {entreprises && !entreprises.length && (
                         <tr>
                             <td colSpan="4" className="text-center">
-                                <div className="p-2">Aucun consultant à afficher</div>
+                                <div className="p-2">Aucune entreprise à afficher</div>
                             </td>
                         </tr>
                     )}
@@ -94,4 +84,4 @@ function ListConsultant() {
     );
 }
 
-export { ListConsultant };
+export { ListEntreprise };

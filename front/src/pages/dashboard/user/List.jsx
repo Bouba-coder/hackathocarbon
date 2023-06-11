@@ -1,66 +1,60 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { consultantService } from "../../services";
+import { userService } from "../../../services";
 
-function ListConsultant() {
-    const [consultants, setConsultants] = useState(null);
+function ListUser() {
+    const [users, setUsers] = useState(null);
 
     useEffect(() => {
-        consultantService.getAll().then((x) => setConsultants(x));
+        userService.getAll().then((x) => setUsers(x));
     }, []);
 
-    function deleteConsultant(id) {
-        setConsultants(
-            consultants.map((x) => {
+    function deleteUser(id) {
+        setUsers(
+            users.map((x) => {
                 if (x.id === id) {
                     x.isDeleting = true;
                 }
                 return x;
             })
         );
-        consultantService.remove(id).then(() => {
-            setConsultants((consultants) =>
-                consultants.filter((x) => x.id !== id)
+        userService.remove(id).then(() => {
+            setUsers((users) =>
+                users.filter((x) => x.id !== id)
             );
         });
     }
 
-    console.log('consultants', consultants)
-
     return (
         <div className="mt-20 px-6 py-4">
             <h1 className="text-center text-3xl leading-9 font-extrabold text-gray-900">
-                Liste des consultants
+                Liste des utilisateurs
             </h1>
             <Link to="add" className="bg-[#00BB7E] text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
-                Ajouter un consultant
+                Ajouter un utilisateur
             </Link>
             <table className="w-full text-sm text-left my-6">
                 <thead>
                     <tr>
+                        <th scope="col" className="px-6 py-3">Email</th>
                         <th scope="col" className="px-6 py-3">Nom</th>
                         <th scope="col" className="px-6 py-3">Prénom</th>
-                        <th scope="col" className="px-6 py-3">Métier</th>
-                        <th scope="col" className="px-6 py-3">Secteur</th>
-                        <th scope="col" className="px-6 py-3">Disponibilité</th>
-                        <th scope="col" className="px-6 py-3">Entreprise</th>
+                        <th scope="col" className="px-6 py-3">Rôle</th>
                         <th scope="col" className="px-6 py-3"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {consultants && consultants.map((consultant) => (
-                        <tr key={consultant.id}>
-                            <td className="px-6 py-4 uppercase">{consultant.user.lastName}</td>
-                            <td className="px-6 py-4 capitalize">{consultant.user.firstName}</td>
-                            <td className="px-6 py-4">{consultant.metier}</td>
-                            <td className="px-6 py-4">{consultant.secteur}</td>
-                            <td className="px-6 py-4">{consultant.disponibilite}</td>
-                            <td className="px-6 py-4">{consultant.entreprise.nom}</td>
+                    {users && users.map((user) => (
+                        <tr key={user.id}>
+                            <td className="px-6 py-4">{user.email}</td>
+                            <td className="px-6 py-4">{user.firstName}</td>
+                            <td className="px-6 py-4">{user.lastName}</td>
+                            <td className="px-6 py-4">{user.role}</td>
                             <td className="px-6 py-4 text-right space-x-2">
-                                <Link to={`edit/${consultant.id}`} className="font-medium text-blue-600">Modifier</Link>
-                                <button onClick={() => deleteConsultant(consultant.id)} className="font-medium text-red-600" disabled={consultant.isDeleting}>
-                                    {consultant.isDeleting ? (
+                                <Link to={`edit/${user.id}`} className="font-medium text-blue-600">Modifier</Link>
+                                <button onClick={() => deleteUser(user.id)} className="font-medium text-red-600" disabled={user.isDeleting}>
+                                    {user.isDeleting ? (
                                         <span>Loading...</span>
                                     ) : (
                                         <span>Supprimer</span>
@@ -69,8 +63,8 @@ function ListConsultant() {
                             </td>
                         </tr>
                     ))}
-                    {!consultants && (
-                        <tr>
+                    {!users &&
+                        <tr>    
                             <td colSpan="4" className="text-center">
                                 <div className="flex align-center">
                                     <svg aria-hidden="true" className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,19 +73,19 @@ function ListConsultant() {
                                     </svg>
                                 </div>
                             </td>
-                        </tr>
-                    )}
-                    {consultants && !consultants.length && (
+                        </tr>   
+                    }
+                    {users && !users.length &&
                         <tr>
                             <td colSpan="4" className="text-center">
-                                <div className="p-2">Aucun consultant à afficher</div>
+                                <div className="p-2">Aucun utilisateur à afficher</div>
                             </td>
                         </tr>
-                    )}
+                    }
                 </tbody>
             </table>
         </div>
     );
 }
 
-export { ListConsultant };
+export { ListUser };

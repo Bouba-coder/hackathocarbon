@@ -1,34 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CardStat from "./CardStat";
 import Grid from "@mui/material/Grid";
 import Description from "./Description";
+import { authService, consultantService, entrepriseService, formationService } from "../../services";
 
 const HomeRH = () => {
+  const [user, setUser] = useState(null);
+  const [consultants, setConsultants] = useState(null);
+  const [entreprises, setEntreprises] = useState(null);
+  const [formations, setFormations] = useState(null);
+
+  useEffect(() => {
+    authService.getCurrentUser().then((res) => {
+      setUser(res);
+    });
+
+    consultantService.getAll().then((res) => {
+      setConsultants(res.length);
+    });
+
+    entrepriseService.getAll().then((res) => {
+      setEntreprises(res.length);
+    });
+
+    formationService.getAll().then((res) => {
+      setFormations(res.length);
+    });
+  }, []);
+
   return (
     <React.Fragment>
       <Grid container spacing={2} textAlign="-webkit-center" marginTop="5%">
         <Grid item xs={12} sm={12} md={12} lg={6}>
           <Description
             title="Mes informations"
-            firstName="Jean"
-            lastName="Dupont"
-            email="jean.dupont@gmail.com"
-            arrived="01/01/2021"
+            firstName={user?.firstName}
+            lastName={user?.lastName}
+            email={user?.email}
+            arrived={Date(user?.createdAt).slice(0, 15).toString()}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={6}>
-          <CardStat title="Nombre de consultants" number={50} arrived={2} />
+          <CardStat title="Nombre de consultants" number={consultants} arrived={1} />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={6}>
           <CardStat
             title="Nombre d'entreprises partenaires"
-            number={50} arrived={2}
+            number={entreprises} arrived={2}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={6}>
           <CardStat
             title="Nombre de formations proposées"
-            number={50} arrived={2}
+            number={formations} arrived={4}
           />
         </Grid>
       </Grid>

@@ -33,6 +33,11 @@ import Drawer from "../components/Drawer";
 import DividerComponent from "../components/DividerComponent";
 import { authService } from "../services";
 import LogoutIcon from '@mui/icons-material/Logout';
+import { ListEntreprise } from "./entreprise/List";
+import { ListConsultant } from "./consultant/List";
+import { ListFormation } from "./formation/List";
+import { ViewUser } from "./user/View";
+import { Link } from "react-router-dom";
 
 const mainListItemsRH = (handleDisplay) => {
   const dashboard = "Tableau de bord";
@@ -42,22 +47,26 @@ const mainListItemsRH = (handleDisplay) => {
 
   const itemsRH = [
     {
-      onClick: () => handleDisplay(<HomeRH />, dashboard),
+      onClick: () => handleDisplay(dashboard),
+      navigate: "",
       icon: <DashboardIcon />,
       text: dashboard,
     },
     {
-      onClick: () => handleDisplay(<ListCompanies />, companies),
+      onClick: () => handleDisplay(companies),
+      navigate: "entreprise",
       icon: <CorporateIcon />,
       text: companies,
     },
     {
-      onClick: () => handleDisplay(<ListConsultants />, consultants),
+      onClick: () => handleDisplay(consultants),
+      navigate: "consultant",
       icon: <PeopleIcon />,
       text: consultants,
     },
     {
-      onClick: () => handleDisplay(<ListTrainings />, trainings),
+      onClick: () => handleDisplay(trainings),
+      navigate: "formation",
       icon: <AssignmentIcon />,
       text: trainings,
     },
@@ -66,10 +75,12 @@ const mainListItemsRH = (handleDisplay) => {
   return (
     <>
       {itemsRH.map((item, index) => (
-        <ListItemButton key={index} onClick={item.onClick}>
-          <ListItemIcon>{item.icon}</ListItemIcon>
-          <ListItemText primary={item.text} />
-        </ListItemButton>
+        <Link to={item.navigate} key={index}>
+          <ListItemButton onClick={item.onClick}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItemButton>
+        </Link>
       ))}
     </>
   );
@@ -80,7 +91,7 @@ const secondaryListItemsRH = (handleDisplay) => {
 
   const secondaryItemsRH = [
     {
-      onClick: () => handleDisplay(<Profile />, profile),
+      onClick: () => handleDisplay(profile),
       icon: <ProfileIcon />,
       text: profile,
     },
@@ -92,16 +103,18 @@ const secondaryListItemsRH = (handleDisplay) => {
         Mes informations
       </ListSubheader>
       {secondaryItemsRH.map((item, index) => (
-        <ListItemButton key={index} onClick={item.onClick}>
-          <ListItemIcon>{item.icon}</ListItemIcon>
-          <ListItemText primary={item.text} />
-        </ListItemButton>
+        <Link to="user/me" key={index}>
+          <ListItemButton onClick={item.onClick}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItemButton>
+        </Link>
       ))}
     </>
   );
 };
 
-const DashboardRH = () => {
+const DashboardRH = ({ children }) => {
   const [open, setOpen] = React.useState(true);
   const [display, setDisplay] = React.useState(<HomeRH />);
   const [title, setTitle] = React.useState("Tableau de bord");
@@ -111,10 +124,11 @@ const DashboardRH = () => {
     setOpen(!open);
   };
 
-  const handleDisplay = (display, title) => {
-    setDisplay(display);
+  const handleDisplay = (title) => {
     setTitle(title);
   };
+
+  console.log("TITLE", title);
 
   return (
     <ThemeProvider theme={theme}>
@@ -147,11 +161,11 @@ const DashboardRH = () => {
             >
               {title}
             </Typography>
-            <IconButton color="inherit">
+            {/* <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
           </Toolbar>
           <DividerComponent />
         </AppBar>
@@ -173,6 +187,17 @@ const DashboardRH = () => {
             {mainListItemsRH(handleDisplay)}
             <Divider sx={{ my: 1 }} />
             {secondaryListItemsRH(handleDisplay)}
+            {/* <ListSubheader component="div" inset>
+              Mes informations
+            </ListSubheader>
+            <Link to="user">
+              <ListItemButton>
+                  <ListItemIcon>
+                    <ProfileIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Mon profil" />
+              </ListItemButton>
+            </Link> */}
             <Divider sx={{ my: 1 }} />
             <ListItemButton key={1} onClick={() => { authService.logout(); window.location.href = "/" }}>
                 <ListItemIcon>
@@ -196,10 +221,10 @@ const DashboardRH = () => {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid item xs={12} md={8} lg={9}>
+            {/* <Grid item xs={12} md={8} lg={9}>
               {display}
-            </Grid>
-
+            </Grid> */}
+            { children }
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
