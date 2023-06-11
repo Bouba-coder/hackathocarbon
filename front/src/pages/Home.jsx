@@ -17,6 +17,7 @@ import CardImage5 from '../assets/image/Jerome.png';
 import CardImage6 from '../assets/image/Sarah.png';
 import PokeCard from '../components/PokeCard';
 import './Home.css';
+import NosPartenaire from '../components/NosPartenaires';
 /*import imageHome from '../assets/image/imageHome.jpg'*/
 
 
@@ -123,7 +124,9 @@ export default function Home() {
         </Container>
       </main>
 
-
+      <Container sx={{ py: 8 }} maxWidth="md">
+        <NosPartenaire />
+     </Container>
 {/* Espace Footer */}
     <Container sx={{ py: 8 }} maxWidth="md">
       <Footer className="footer"/>
