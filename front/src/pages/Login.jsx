@@ -23,6 +23,7 @@ export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     authService.login(username, password).then((response) => {
+      localStorage.setItem("currentUser", JSON.stringify(response.data.id));
       if (response.data.role === "ADMIN" || response.data.role === "RH") {
         window.location.href = "/dashboard";
       } else {
