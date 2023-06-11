@@ -45,3 +45,30 @@ export const themeLogin = createTheme({
   },
 });
 
+export const themeHome = createTheme({
+  palette: {
+    mode: "dark",
+    divider: blueCarbon,
+    background: {
+      default: greyCarbon,
+      paper: greyCarbon,
+    },
+    text: {
+      primary: whiteCarbon,
+      secondary: greenCarbon,
+    },
+  },
+});
+
+export const themeCardContainer = createTheme({
+  palette: {
+    background: {
+      default: greyCarbon,
+      paper: greyCarbon,
+    },
+    text: {
+      primary: whiteCarbon,
+      secondary: greenCarbon,
+    },
+  },
+});
