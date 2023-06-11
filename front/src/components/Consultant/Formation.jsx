@@ -37,7 +37,11 @@ useEffect(() => {
           },
         }}
       >
-        {loading ? <h1>loading</h1> : formations.map((formation) => <CardForm title={formation.nom} description={formation.description} duree={formation.duree}  niveau={formation.niveau} contact={`mailto:test@example.com`} formationId={formation.id} userId={user?.id} />)}
+        {
+        loading ? <h1>loading</h1> : formations.map((formation) => 
+          <CardForm title={formation.nom} description={formation.description} duree={formation.duree}  niveau={formation.niveau} contact={`mailto:test@example.com`} formationId={formation.id} userId={user?.id} />
+        )
+        }
       </Box>
 
     </>

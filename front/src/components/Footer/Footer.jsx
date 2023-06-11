@@ -2,17 +2,29 @@ import { Link } from "react-router-dom";
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Copyright from "../Copyright";
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import { styled } from '@mui/material/styles';
+import Copyright from '../Copyright';
+
+const StyledFooter = styled('footer')({
+  backgroundColor: '#f5f5f5',
+  padding: '40px 0',
+});
+
+const StyledTypography = styled(Typography)({
+  fontWeight: 'bold',
+});
 
 const Footer = () => {
   return (
-    <footer>
-      <Container>
-        <Grid container spacing={2}>
+    <StyledFooter>
+      <Container maxWidth="lg">
+        <Grid container spacing={4}>
           <Grid item xs={12} sm={4}>
-            <Typography variant="h6" component="h3">
+            <StyledTypography variant="h6" component="h3">
               Pour les Entreprises
-            </Typography>
+            </StyledTypography>
             <ul>
               <li>
                 <Link to="#">Pourquoi Carbon</Link>
@@ -29,9 +41,9 @@ const Footer = () => {
             </ul>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Typography variant="h6" component="h3">
-            Pour les Freelances
-            </Typography>
+            <StyledTypography variant="h6" component="h3">
+              Pour les Freelances
+            </StyledTypography>
             <ul>
               <li>
                 <Link to="#">Pourquoi Carbon</Link>
@@ -51,9 +63,9 @@ const Footer = () => {
             </ul>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Typography variant="h6" component="h3">
+            <StyledTypography variant="h6" component="h3">
               Ressources
-            </Typography>
+            </StyledTypography>
             <ul>
               <li>
                 <Link to="#">Article</Link>
@@ -62,7 +74,7 @@ const Footer = () => {
                 <Link to="#">Guides</Link>
               </li>
               <li>
-                <Link to="#">Succes Stories</Link>
+                <Link to="#">Success Stories</Link>
               </li>
               <li>
                 <Link to="#">Aide</Link>
@@ -71,10 +83,11 @@ const Footer = () => {
           </Grid>
         </Grid>
       </Container>
-      <Container sx={{ py: 10 }} maxWidth="md">
+      <Box py={6} textAlign="center">
+        <Divider />
         <Copyright />
-      </Container>
-    </footer>
+      </Box>
+    </StyledFooter>
   );
 };
 
