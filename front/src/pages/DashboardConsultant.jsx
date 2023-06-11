@@ -47,17 +47,14 @@ const sideMenuConsultant = (handleDisplay) => {
 
   const itemsConsultant = [
     {
-      onClick: () => handleDisplay(<Formation />, trainings),
+      onClick: () => handleDisplay(trainings),
+      navigate: "",
       icon: <DashboardIcon />,
       text: 'Formation'
     },
-    // {
-    //   onClick: () => handleDisplay(<MyProfile />, cv),
-    //   icon: <AccessibilityNewIcon />,
-    //   text: "Cv"
-    // },
     {
-      onClick: () => handleDisplay(<Forum />, forum),
+      onClick: () => handleDisplay(forum),
+      navigate: "forum",
       icon: <ChatIcon />,
       text: 'Forum'
     }
@@ -67,10 +64,12 @@ const sideMenuConsultant = (handleDisplay) => {
   return (
     <>
       {itemsConsultant.map((item, index) => (
-        <ListItemButton key={index} onClick={item.onClick}>
-          <ListItemIcon>{item.icon}</ListItemIcon>
-          <ListItemText primary={item.text} />
-        </ListItemButton>
+        <Link to={item.navigate} key={index}>
+          <ListItemButton onClick={item.onClick}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItemButton>
+        </Link>
       ))}
     </>
   );
@@ -81,12 +80,14 @@ const secondMenuConsultant = (handleDisplay, data) => {
   const experiences = "Mon dossier consultant";
   const secondaryItemsRH = [
     {
-      onClick: () => handleDisplay(<ProfilConsultant  consultant={ data } />, profile),
+      onClick: () => handleDisplay(profile),
+      navigate: "user",
       icon: <ProfileIcon />,
       text: 'Mon profil'
     },
     {
-      onClick: () => handleDisplay(<ConsultantForm />, experiences),
+      onClick: () => handleDisplay(experiences),
+      navigate: "consultant",
       icon: <FolderIcon />,
       text: 'Mon dossier'
     },
@@ -98,17 +99,19 @@ const secondMenuConsultant = (handleDisplay, data) => {
         Mon espace personnel
       </ListSubheader>
       {secondaryItemsRH.map((item, index) => (
-        <ListItemButton key={index} onClick={item.onClick}>
-          <ListItemIcon>{item.icon}</ListItemIcon>
-          <ListItemText primary={item.text} />
-        </ListItemButton>
+        <Link to={item.navigate} key={index}>
+          <ListItemButton key={index} onClick={item.onClick}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} />
+          </ListItemButton>
+        </Link>
       ))}
     </>
   );
 };
 
 
-export default function DashboardConsultant() {
+export default function DashboardConsultant({ children }) {
 //get consultant
 const navigate = useNavigate();
 const [consultant, setConsultant] = useState({});
@@ -135,8 +138,8 @@ useEffect(() => {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  const handleDisplay = (display, title) => {
-    setDisplay(display);
+  const handleDisplay = (title) => {
+    // setDisplay(display);
     setTitle(title);
   };
 
@@ -229,7 +232,8 @@ useEffect(() => {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            {display}
+            {/* {display} */}
+            {children}
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
