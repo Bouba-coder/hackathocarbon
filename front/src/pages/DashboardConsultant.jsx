@@ -78,6 +78,8 @@ const sideMenuConsultant = (handleDisplay) => {
 const secondMenuConsultant = (handleDisplay, data) => {
   const profile = "Mon profil";
   const experiences = "Mon dossier consultant";
+  const formations = "Mes formations";
+
   const secondaryItemsRH = [
     {
       onClick: () => handleDisplay(profile),
@@ -90,6 +92,12 @@ const secondMenuConsultant = (handleDisplay, data) => {
       navigate: "consultant",
       icon: <FolderIcon />,
       text: 'Mon dossier'
+    },
+    {
+      onClick: () => handleDisplay(formations),
+      navigate: "formation",
+      icon: <DashboardIcon />,
+      text: 'Mes Formations'
     },
   ];
 
