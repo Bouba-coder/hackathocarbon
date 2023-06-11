@@ -27,7 +27,7 @@ function HomeOpinion() {
                 </div>
                 <div class="flex flex-col justify-center items-center text-white text-2xl font-bold">
                     <a href="https://fr.trustpilot.com/" class="bg-[#00BB7E] mt-8 text-white py-2 px-6 rounded-full">
-                        Nous sommes là pour votre écoute
+                        Nous sommes à votre écoute
                     </a>
                 </div>
             </div>
