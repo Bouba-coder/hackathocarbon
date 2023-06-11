@@ -21,7 +21,7 @@ const CardStat = ({ title, number, arrived }) => {
             {number}
           </Typography>
           <Typography color="text.secondary" sx={{ flex: 1 }}>
-            {arrived}
+            +{arrived} ce mois-ci
           </Typography>
         </Paper>
     </React.Fragment>
