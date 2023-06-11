@@ -38,6 +38,7 @@ import { Link } from "react-router-dom";
 import { authService } from "../services";
 import { useNavigate } from "react-router-dom";
 import ChatIcon from '@mui/icons-material/Chat';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 
 //main menu consultant
 const sideMenuConsultant = (handleDisplay) => {
@@ -96,7 +97,7 @@ const secondMenuConsultant = (handleDisplay, data) => {
     {
       onClick: () => handleDisplay(formations),
       navigate: "formation",
-      icon: <DashboardIcon />,
+      icon: <AssignmentIcon />,
       text: 'Mes Formations'
     },
   ];
