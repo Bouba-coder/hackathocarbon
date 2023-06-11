@@ -46,7 +46,7 @@ model Formation {
   nom         String   @unique
   niveau      String?
   description String?
-  duree       Int?
+  duree       String?
   users       User[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
