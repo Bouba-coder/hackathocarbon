@@ -29,11 +29,14 @@ import CorporateIcon from "@mui/icons-material/CorporateFare";
 import PeopleIcon from "@mui/icons-material/People";
 import ProfileIcon from "@mui/icons-material/AccountCircle";
 import DividerComponent from "../components/DividerComponent";
+import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
+import useAuth from "../hooks/useAuth";
+import UpdateConsultant from "./consultant/Update";
 
 //main menu consultant
 const sideMenuConsultant = (handleDisplay) => {
   const trainings = "Formations";
-  const experiences = "Experiences";
+  const cv = "cv";
   const forum = "Forum";
 
   const itemsConsultant = [
@@ -43,9 +46,9 @@ const sideMenuConsultant = (handleDisplay) => {
       text: 'Formation'
     },
     {
-      onClick: () => handleDisplay(<ConsultantForm />, experiences),
-      icon: <CorporateIcon />,
-      text: 'Experiences'
+      onClick: () => handleDisplay(<UpdateConsultant />, cv),
+      icon: <AccessibilityNewIcon />,
+      text: "Cv"
     },
     {
       onClick: () => handleDisplay(<Forum />, forum),
@@ -69,12 +72,18 @@ const sideMenuConsultant = (handleDisplay) => {
 //secondary menu consultant
 const secondMenuConsultant = (handleDisplay, data) => {
   const profile = "Mon Profil";
+  const experiences = "Formations suivi";
   const secondaryItemsRH = [
     {
       onClick: () => handleDisplay(<ProfilConsultant  consultant={ data } />, profile),
       icon: <ProfileIcon />,
       text: 'Profil'
-    }
+    },
+    {
+      onClick: () => handleDisplay(<ConsultantForm />, experiences),
+      icon: <CorporateIcon />,
+      text: 'Fomations suivi'
+    },
   ];
 
   return (
@@ -91,17 +100,26 @@ const secondMenuConsultant = (handleDisplay, data) => {
     </>
   );
 };
+
+
 export default function DashboardConsultant() {
 //get consultant
 const [consultant, setConsultant] = useState({});
-const [open, setOpen] = React.useState(true); 
+const [open, setOpen] = React.useState(true);
+const [loading, setLoading] = useState(false) 
 const theme = useTheme();
+
 useEffect(() => {
   const userId = localStorage.getItem("currentUser")
   getConsultantById(userId).then((res)=>{
-    console.log("get consultant +++++ by id", res)
     setConsultant(res)
   })
+
+  console.log("get consultant +++++ by id", consultant)
+  if (Object.keys(consultant).length === 0) {
+    setLoading(true);
+  }
+
 }, []);
 
   const [display, setDisplay] = React.useState(<Formation />);
